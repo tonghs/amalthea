@@ -1,0 +1,21 @@
+description: Izmantojiet yml, lai rakstītu kopiju, izmantojiet mopsu, lai rakstītu veidnes, un izveidojiet statisku lapu katrā valodā.
+lang: mainīt valodu
+close: slēgšana
+theme:
+  title: tēma
+  system: Sekojiet sistēmai
+  light: gaiša krāsa
+  dark: Tumšs
+hero:
+  title: Viens eksemplārs, daudzas valodas
+  desc: Izmantojiet yml, lai rakstītu copy, un mops, lai rakstītu veidnes. Pēc izveides jūs saņemat tīri statisku lapu katrai valodai.
+  cta: Skatīt funkcijas
+features:
+  title: Īpašie elementi
+  li:
+    - title: Copywriting ir konfigurācija
+      desc: Copywriting un veidnes ir atdalītas. Lai mainītu kopiju, kodam nav jāpieskaras.
+    - title: automātiskā tulkošana
+      desc: Tiek saglabāta tikai ķīniešu kopija, un to var pakāpeniski tulkot citās valodās ar vienu komandu.
+    - title: nulle izpildlaika
+      desc: Izvada tikai HTML un CSS, un to var izvietot jebkurā statiskā mitināšanā.

@@ -1,0 +1,21 @@
+description: Uża yml biex tikteb kopja, uża pug biex tikteb mudelli, u tibni paġna statika f'kull lingwa.
+lang: jaqilbu l-lingwa
+close: għeluq
+theme:
+  title: tema
+  system: Segwi s-sistema
+  light: kulur ċar
+  dark: Dlam
+hero:
+  title: Kopja waħda, ħafna lingwi
+  desc: Uża yml biex tikteb kopja u pug biex tikteb mudelli. Wara li tibni, ikollok paġna purament statika għal kull lingwa.
+  cta: Ara l-karatteristiċi
+features:
+  title: Feature Highlights
+  li:
+    - title: Kitba hija konfigurazzjoni
+      desc: Kitba u mudelli huma separati. M'għandekx bżonn tmiss il-kodiċi biex tibdel il-kopja.
+    - title: traduzzjoni awtomatika
+      desc: Tinżamm kopja Ċiniża biss, u tista 'tiġi tradotta b'mod inkrementali f'lingwi oħra bi kmand wieħed.
+    - title: żero runtime
+      desc: Outputs HTML u CSS biss u jistgħu jiġu skjerati fi kwalunkwe hosting statiku.

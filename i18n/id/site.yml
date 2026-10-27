@@ -1,0 +1,21 @@
+description: Gunakan yml untuk menulis salinan, gunakan pug untuk menulis templat, dan buat halaman statis dalam setiap bahasa.
+lang: beralih bahasa
+close: penutup
+theme:
+  title: tema
+  system: Ikuti sistemnya
+  light: warna terang
+  dark: Gelap
+hero:
+  title: Satu salinan, banyak bahasa
+  desc: Gunakan yml untuk menulis copy dan pug untuk menulis template. Setelah membangun, Anda mendapatkan halaman statis murni per bahasa.
+  cta: Lihat fitur
+features:
+  title: Sorotan Fitur
+  li:
+    - title: Copywriting adalah konfigurasi
+      desc: Copywriting dan template dipisahkan. Anda tidak perlu menyentuh kode untuk mengubah salinannya.
+    - title: terjemahan otomatis
+      desc: Hanya salinan bahasa Mandarin yang dipertahankan, dan dapat diterjemahkan secara bertahap ke bahasa lain dengan satu perintah.
+    - title: waktu proses nol
+      desc: Hanya menghasilkan HTML dan CSS dan dapat diterapkan ke hosting statis apa pun.

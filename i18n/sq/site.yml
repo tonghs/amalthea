@@ -1,0 +1,21 @@
+description: Përdorni yml për të shkruar kopje, përdorni pug për të shkruar shabllone dhe për të ndërtuar një faqe statike në secilën gjuhë.
+lang: ndërroni gjuhën
+close: mbyllje
+theme:
+  title: temë
+  system: Ndiqni sistemin
+  light: ngjyrë të lehtë
+  dark: E errët
+hero:
+  title: Një kopje, shumë gjuhë
+  desc: Përdorni yml për të shkruar kopje dhe pug për të shkruar shabllone. Pas ndërtimit, ju merrni një faqe thjesht statike për gjuhë.
+  cta: Shikoni veçoritë
+features:
+  title: Pikat kryesore të veçorive
+  li:
+    - title: Shkrimi i kopjimit është konfigurim
+      desc: Shkrimi i kopjimit dhe shabllonet janë të ndara. Nuk keni nevojë të prekni kodin për të ndryshuar kopjen.
+    - title: përkthim automatik
+      desc: Ruhet vetëm kopja kineze dhe mund të përkthehet gradualisht në gjuhë të tjera me një komandë të vetme.
+    - title: kohëzgjatje zero
+      desc: Nxjerr vetëm HTML dhe CSS dhe mund të vendoset në çdo host statik.

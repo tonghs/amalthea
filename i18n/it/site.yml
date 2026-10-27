@@ -1,0 +1,21 @@
+description: Usa yml per scrivere testi, usa pug per scrivere modelli e crea una pagina statica in ogni lingua.
+lang: cambiare lingua
+close: chiusura
+theme:
+  title: tema
+  system: Segui il sistema
+  light: colore chiaro
+  dark: Buio
+hero:
+  title: Una copia, tante lingue
+  desc: Usa yml per scrivere copy e pug per scrivere modelli. Dopo la creazione, ottieni una pagina puramente statica per lingua.
+  cta: Visualizza le funzionalità
+features:
+  title: Caratteristiche principali
+  li:
+    - title: Il copywriting è configurazione
+      desc: Copywriting e modelli sono separati. Non è necessario toccare il codice per modificare la copia.
+    - title: traduzione automatica
+      desc: Viene mantenuta solo la copia cinese e può essere tradotta in modo incrementale in altre lingue con un singolo comando.
+    - title: tempo di esecuzione pari a zero
+      desc: Genera solo HTML e CSS e può essere distribuito su qualsiasi hosting statico.

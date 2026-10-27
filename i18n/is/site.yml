@@ -1,0 +1,21 @@
+description: Notaðu yml til að skrifa afrit, notaðu pug til að skrifa sniðmát og byggðu fasta síðu á hverju tungumáli.
+lang: skipta um tungumál
+close: lokun
+theme:
+  title: þema
+  system: Fylgdu kerfinu
+  light: ljós litur
+  dark: Myrkur
+hero:
+  title: Eitt eintak, mörg tungumál
+  desc: Notaðu yml til að skrifa afrit og pug til að skrifa sniðmát. Eftir byggingu færðu hreint kyrrstæða síðu fyrir hvert tungumál.
+  cta: Skoða eiginleika
+features:
+  title: Helstu eiginleikar
+  li:
+    - title: Auglýsingahöfundur er stillingar
+      desc: Auglýsingahöfundur og sniðmát eru aðskilin. Þú þarft ekki að snerta kóðann til að breyta afritinu.
+    - title: sjálfvirk þýðing
+      desc: Aðeins kínverska afrit er viðhaldið og það er hægt að þýða það í skrefum yfir á önnur tungumál með einni skipun.
+    - title: núll keyrslutími
+      desc: Sendir aðeins HTML og CSS og hægt er að dreifa því á hvaða kyrrstæða hýsingu sem er.

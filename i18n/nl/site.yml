@@ -1,0 +1,21 @@
+description: Gebruik yml om teksten te schrijven, gebruik pug om sjablonen te schrijven en bouw een statische pagina in elke taal.
+lang: van taal wisselen
+close: sluiting
+theme:
+  title: thema
+  system: Volg het systeem
+  light: lichte kleur
+  dark: Donker
+hero:
+  title: Eén exemplaar, vele talen
+  desc: Gebruik yml om teksten te schrijven en pug om sjablonen te schrijven. Na het bouwen krijg je een puur statische pagina per taal.
+  cta: Bekijk functies
+features:
+  title: Kenmerkende hoogtepunten
+  li:
+    - title: Copywriting is configuratie
+      desc: Copywriting en templates zijn gescheiden. U hoeft de code niet aan te raken om de kopie te wijzigen.
+    - title: automatische vertaling
+      desc: Er wordt alleen een Chinese kopie bijgehouden en deze kan met één enkele opdracht stapsgewijs in andere talen worden vertaald.
+    - title: nul looptijd
+      desc: Voert alleen HTML en CSS uit en kan op elke statische hosting worden geïmplementeerd.

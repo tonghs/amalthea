@@ -1,0 +1,21 @@
+description: Az yml segítségével írjon másolatot, használja a pug-ot sablonok írásához, és készítsen statikus oldalt minden nyelven.
+lang: nyelvet váltani
+close: bezárás
+theme:
+  title: téma
+  system: Kövesse a rendszert
+  light: világos színű
+  dark: Sötét
+hero:
+  title: Egy példány, sok nyelv
+  desc: Használja az yml-t a copy és a pug-ot a sablonok írásához. Az építés után nyelvenként egy tisztán statikus oldalt kap.
+  cta: Funkciók megtekintése
+features:
+  title: Funkciók kiemelése
+  li:
+    - title: A szövegírás konfiguráció
+      desc: A szövegírás és a sablonok elkülönülnek. A másolat megváltoztatásához nem kell megérintene a kódot.
+    - title: automatikus fordítás
+      desc: Csak a kínai másolatot tartják fenn, és egyetlen paranccsal fokozatosan lefordítható más nyelvekre.
+    - title: nulla futásidő
+      desc: Csak HTML-t és CSS-t ad ki, és bármely statikus tárhelyen telepíthető.

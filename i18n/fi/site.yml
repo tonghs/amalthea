@@ -1,0 +1,21 @@
+description: Käytä yml-komentoa kopion kirjoittamiseen, käytä mopsia mallien kirjoittamiseen ja luo staattinen sivu jokaisella kielellä.
+lang: vaihtaa kieltä
+close: päättäminen
+theme:
+  title: teema
+  system: Seuraa järjestelmää
+  light: vaalea väri
+  dark: Tumma
+hero:
+  title: Yksi kopio, monta kieltä
+  desc: Käytä yml-komentoa kopioidaksesi ja mopsia mallien kirjoittamiseen. Rakentamisen jälkeen saat puhtaasti staattisen sivun kieltä kohden.
+  cta: Näytä ominaisuudet
+features:
+  title: Ominaisuuden kohokohdat
+  li:
+    - title: Copywriting on konfigurointi
+      desc: Copywriting ja mallit erotetaan toisistaan. Sinun ei tarvitse koskea koodia muuttaaksesi kopiota.
+    - title: automaattinen käännös
+      desc: Vain kiinalainen kopio säilytetään, ja se voidaan kääntää asteittain muille kielille yhdellä komennolla.
+    - title: nolla ajoaikaa
+      desc: Tulostaa vain HTML:n ja CSS:n, ja se voidaan ottaa käyttöön mihin tahansa staattiseen isännöintiin.

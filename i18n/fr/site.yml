@@ -1,0 +1,21 @@
+description: Utilisez yml pour écrire une copie, utilisez pug pour écrire des modèles et créez une page statique dans chaque langue.
+lang: changer de langue
+close: fermeture
+theme:
+  title: thème
+  system: Suivez le système
+  light: couleur claire
+  dark: Sombre
+hero:
+  title: Un exemplaire, plusieurs langues
+  desc: Utilisez yml pour écrire une copie et pug pour écrire des modèles. Après la construction, vous obtenez une page purement statique par langue.
+  cta: Afficher les fonctionnalités
+features:
+  title: Points forts des fonctionnalités
+  li:
+    - title: La rédaction est une configuration
+      desc: La rédaction et les modèles sont séparés. Vous n’avez pas besoin de toucher au code pour modifier la copie.
+    - title: traduction automatique
+      desc: Seule la copie chinoise est conservée et elle peut être traduite progressivement dans d'autres langues avec une seule commande.
+    - title: zéro exécution
+      desc: Produit uniquement du HTML et du CSS et peut être déployé sur n'importe quel hébergement statique.

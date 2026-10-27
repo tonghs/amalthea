@@ -1,0 +1,21 @@
+description: Bruk yml til å skrive kopi, bruk pug til å skrive maler, og bygg en statisk side på hvert språk.
+lang: bytte språk
+close: stenging
+theme:
+  title: tema
+  system: Følg systemet
+  light: lys farge
+  dark: Mørk
+hero:
+  title: Ett eksemplar, mange språk
+  desc: Bruk yml til å skrive kopi og pug til å skrive maler. Etter bygging får du en rent statisk side per språk.
+  cta: Se funksjoner
+features:
+  title: Funksjonshøydepunkter
+  li:
+    - title: Copywriting er konfigurasjon
+      desc: Copywriting og maler er atskilt. Du trenger ikke trykke på koden for å endre kopien.
+    - title: automatisk oversettelse
+      desc: Bare kinesisk kopi opprettholdes, og den kan gradvis oversettes til andre språk med en enkelt kommando.
+    - title: null kjøretid
+      desc: Sender bare HTML og CSS og kan distribueres til enhver statisk hosting.

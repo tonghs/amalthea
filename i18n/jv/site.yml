@@ -1,0 +1,21 @@
+description: Gunakake yml kanggo nulis salinan, gunakake pug kanggo nulis template, lan gawe kaca statis ing saben basa.
+lang: ngalih basa
+close: penutupan
+theme:
+  title: tema
+  system: Tindakake sistem
+  light: werna cahya
+  dark: peteng
+hero:
+  title: Siji salinan, akeh basa
+  desc: Gunakake yml kanggo nulis salinan lan pug kanggo nulis template. Sawise mbangun, sampeyan entuk kaca statis saben basa.
+  cta: Ndeleng fitur
+features:
+  title: Sorotan Fitur
+  li:
+    - title: Copywriting iku konfigurasi
+      desc: Copywriting lan template dipisahake. Sampeyan ora perlu ndemek kode kanggo ngganti salinan.
+    - title: terjemahan otomatis
+      desc: Mung salinan Cina sing dikelola, lan bisa diterjemahake sacara bertahap menyang basa liya kanthi printah siji.
+    - title: nul runtime
+      desc: Output mung HTML lan CSS lan bisa disebarake menyang hosting statis.

@@ -1,0 +1,21 @@
+description: Gamita ang yml sa pagsulat og kopya, paggamit og pug sa pagsulat og mga templates, ug paghimo og static nga panid sa matag pinulongan.
+lang: pagbalhin sa pinulongan
+close: pagsira
+theme:
+  title: tema
+  system: Sunda ang sistema
+  light: kahayag nga kolor
+  dark: Ngitngit
+hero:
+  title: Usa ka kopya, daghang pinulongan
+  desc: Gamita ang yml sa pagsulat og kopya ug pug sa pagsulat og mga templates. Pagkahuman sa pagtukod, nakakuha ka usa ka static nga panid matag sinultian.
+  cta: Tan-awa ang mga bahin
+features:
+  title: Feature Highlights
+  li:
+    - title: Ang copywriting kay configuration
+      desc: Ang copywriting ug templates gibulag. Dili nimo kinahanglan nga hikapon ang code aron mabag-o ang kopya.
+    - title: awtomatik nga paghubad
+      desc: Ang kopya sa Intsik lamang ang gipadayon, ug mahimo kini nga us aka us aka paghubad sa ubang mga lengguwahe nga adunay usa ka mando.
+    - title: zero runtime
+      desc: Ang mga output lamang sa HTML ug CSS ug mahimong i-deploy sa bisan unsang static hosting.

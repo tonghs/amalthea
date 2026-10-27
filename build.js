@@ -31,7 +31,9 @@ export const missing = (src, t, path = []) =>
 */
 const build = ({ root = import.meta.dirname, out = join(root, "dist"), site = process.env.SITE_URL } = {}) => {
   const read = (...p) => readFileSync(join(root, ...p), "utf8"),
-    { from } = load(read("tran.yml")).tran,
+    // 解析出错时报错信息带上文件路径：75 种语言里定位是哪个文件出错
+    yml = (...p) => load(read(...p), { filename: join(...p) }),
+    { from } = yml("tran.yml").tran,
     { homepage, brand } = JSON.parse(read("package.json")),
     // 补结尾斜杠，否则 new URL("en/", "https://a.com/site") 会丢掉 site
     home = (site || homepage)?.replace(/\/?$/, "/"),
@@ -43,9 +45,9 @@ const build = ({ root = import.meta.dirname, out = join(root, "dist"), site = pr
   if (!codes.includes(from)) throw new Error(`缺少源语言文案 i18n/${from}/site.yml`);
   codes.sort((a, b) => (b === from) - (a === from) || CODE.indexOf(a) - CODE.indexOf(b));
 
-  const src = load(read("i18n", from, "site.yml")),
+  const src = yml("i18n", from, "site.yml"),
     langs = codes.map((code) => {
-      const t = load(read("i18n", code, "site.yml")),
+      const t = yml("i18n", code, "site.yml"),
         lack = missing(src, t);
       if (lack.length) throw new Error(`i18n/${code}/site.yml 缺少 ${lack.join(", ")}，请运行 bun run tran`);
       return {

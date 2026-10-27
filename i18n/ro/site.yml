@@ -1,0 +1,21 @@
+description: Utilizați yml pentru a scrie o copie, utilizați pug pentru a scrie șabloane și creați o pagină statică în fiecare limbă.
+lang: schimba limba
+close: închidere
+theme:
+  title: temă
+  system: Urmați sistemul
+  light: culoare deschisă
+  dark: Întuneric
+hero:
+  title: Un exemplar, multe limbi
+  desc: Utilizați yml pentru a scrie copie și pug pentru a scrie șabloane. După creare, obțineți o pagină pur statică pentru fiecare limbă.
+  cta: Vedeți caracteristicile
+features:
+  title: Repere ale caracteristicilor
+  li:
+    - title: Copywriting este configurație
+      desc: Copywriting și șabloanele sunt separate. Nu trebuie să atingeți codul pentru a schimba copia.
+    - title: traducere automată
+      desc: Este menținută doar o copie chineză și poate fi tradusă progresiv în alte limbi cu o singură comandă.
+    - title: timp de rulare zero
+      desc: Produce numai HTML și CSS și poate fi implementat pe orice găzduire statică.

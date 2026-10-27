@@ -1,0 +1,21 @@
+description: Použite yml na písanie kópií, použite pug na písanie šablón a vytvorte statickú stránku v každom jazyku.
+lang: prepnúť jazyk
+close: uzavretie
+theme:
+  title: tému
+  system: Postupujte podľa systému
+  light: svetlej farby
+  dark: Tmavý
+hero:
+  title: Jedna kópia, veľa jazykov
+  desc: Použite yml na písanie copy a pug na písanie šablón. Po vytvorení získate čisto statickú stránku pre každý jazyk.
+  cta: Zobraziť funkcie
+features:
+  title: Hlavné prvky
+  li:
+    - title: Copywriting je konfigurácia
+      desc: Copywriting a šablóny sú oddelené. Ak chcete zmeniť kópiu, nemusíte sa dotknúť kódu.
+    - title: automatický preklad
+      desc: Zachováva sa iba čínska kópia a môže byť postupne preložená do iných jazykov pomocou jediného príkazu.
+    - title: nulový čas chodu
+      desc: Výstupom je iba HTML a CSS a dá sa nasadiť na akýkoľvek statický hosting.

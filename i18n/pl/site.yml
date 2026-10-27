@@ -1,0 +1,21 @@
+description: Użyj yml do napisania tekstu, użyj pug do napisania szablonów i zbuduj stronę statyczną w każdym języku.
+lang: zmień język
+close: zamknięcie
+theme:
+  title: temat
+  system: Postępuj zgodnie z systemem
+  light: jasny kolor
+  dark: Ciemny
+hero:
+  title: Jeden egzemplarz, wiele języków
+  desc: Użyj yml do pisania kopii i pug do pisania szablonów. Po zbudowaniu otrzymasz czysto statyczną stronę dla każdego języka.
+  cta: Zobacz funkcje
+features:
+  title: Najważniejsze cechy
+  li:
+    - title: Copywriting to konfiguracja
+      desc: Copywriting i szablony są oddzielone. Nie musisz dotykać kodu, aby zmienić kopię.
+    - title: tłumaczenie automatyczne
+      desc: Zachowana jest tylko chińska kopia, którą można stopniowo tłumaczyć na inne języki za pomocą jednego polecenia.
+    - title: zerowy czas działania
+      desc: Wyprowadza tylko kod HTML i CSS i można go wdrożyć na dowolnym hostingu statycznym.

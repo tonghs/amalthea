@@ -1,0 +1,21 @@
+description: Koristite yml za pisanje kopije, koristite pug za pisanje šablona i napravite statičnu stranicu na svakom jeziku.
+lang: promijeni jezik
+close: zatvaranje
+theme:
+  title: tema
+  system: Pratite sistem
+  light: svijetle boje
+  dark: Dark
+hero:
+  title: Jedan primjerak, mnogo jezika
+  desc: Koristite yml za pisanje copy i pug za pisanje šablona. Nakon izgradnje, dobijate čisto statičnu stranicu po jeziku.
+  cta: Pogledajte karakteristike
+features:
+  title: Feature Highlights
+  li:
+    - title: Copywriting je konfiguracija
+      desc: Copywriting i šabloni su odvojeni. Ne morate dodirivati kod da promijenite kopiju.
+    - title: automatski prevod
+      desc: Održava se samo kineski primjerak i može se postepeno prevoditi na druge jezike jednom naredbom.
+    - title: zero runtime
+      desc: Izlazi samo HTML i CSS i može se postaviti na bilo koji statički hosting.

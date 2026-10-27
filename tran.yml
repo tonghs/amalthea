@@ -1,5 +1,5 @@
 tran:
   from: zh
-  to_li: [en, ja]
+  to_li: "*"
 dir:
   - i18n

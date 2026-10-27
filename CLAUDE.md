@@ -49,4 +49,5 @@ bun run tran     # 增量翻译，token 在 ~/.config/webc.site.yml
 1. 构建失败时不能留下残缺产物：校验和模板渲染都放在 `rmSync(out)` 之前。所有页面先渲染到内存，全部成功后再清空输出目录并写盘。
 2. `src/pick.js` 的源码会内联到根页，函数内不能引用外部变量。
 3. 改动 `build.js`、`src/*.js` 后必须补测试（`test/`），覆盖边界和异常。
-4. `page.js` 的交互测试在 `test/page.test.js`：用 happy-dom 加载真实构建产物，让内联脚本自己运行。happy-dom 不派发 `DOMContentLoaded`，测试的 `load()` 会手动补发。
+4. 测试用 `test/fixture.js` 生成临时项目，文案只含 zh、en、ja。不要让断言依赖仓库开启了几种语言，否则增删语言就会让测试失败。
+5. `page.js` 的交互测试在 `test/page.test.js`：用 happy-dom 加载真实构建产物，让内联脚本自己运行。happy-dom 不派发 `DOMContentLoaded`，测试的 `load()` 会手动补发。

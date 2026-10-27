@@ -1,0 +1,21 @@
+description: Use yml para escrever textos, use pug para escrever modelos e crie uma página estática em cada idioma.
+lang: mudar de idioma
+close: encerramento
+theme:
+  title: tema
+  system: Siga o sistema
+  light: cor clara
+  dark: Escuro
+hero:
+  title: Uma cópia, muitos idiomas
+  desc: Use yml para escrever textos e pug para escrever modelos. Após a construção, você obtém uma página puramente estática por idioma.
+  cta: Ver recursos
+features:
+  title: Destaques de recursos
+  li:
+    - title: Redação é configuração
+      desc: Redação e modelos são separados. Você não precisa tocar no código para alterar a cópia.
+    - title: tradução automática
+      desc: Apenas a cópia em chinês é mantida e pode ser traduzida gradativamente para outros idiomas com um único comando.
+    - title: tempo de execução zero
+      desc: Produz apenas HTML e CSS e pode ser implantado em qualquer hospedagem estática.

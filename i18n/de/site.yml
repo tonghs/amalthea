@@ -1,0 +1,21 @@
+description: Verwenden Sie yml zum Schreiben von Kopien, verwenden Sie pug zum Schreiben von Vorlagen und erstellen Sie eine statische Seite in jeder Sprache.
+lang: Sprache wechseln
+close: Schließung
+theme:
+  title: Thema
+  system: Folgen Sie dem System
+  light: helle Farbe
+  dark: Dunkel
+hero:
+  title: Ein Exemplar, viele Sprachen
+  desc: Verwenden Sie yml zum Schreiben von Kopien und pug zum Schreiben von Vorlagen. Nach dem Aufbau erhalten Sie pro Sprache eine rein statische Seite.
+  cta: Funktionen anzeigen
+features:
+  title: Feature-Highlights
+  li:
+    - title: Copywriting ist Konfiguration
+      desc: Texterstellung und Vorlagen sind getrennt. Sie müssen den Code nicht berühren, um die Kopie zu ändern.
+    - title: automatische Übersetzung
+      desc: Es wird nur eine chinesische Kopie beibehalten und kann mit einem einzigen Befehl schrittweise in andere Sprachen übersetzt werden.
+    - title: Null Laufzeit
+      desc: Gibt nur HTML und CSS aus und kann auf jedem statischen Hosting bereitgestellt werden.

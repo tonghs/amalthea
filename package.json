@@ -4,6 +4,7 @@
   "type": "module",
   "homepage": "https://example.com/",
   "brand": "Amalthea",
+  "packageManager": "bun@1.4.4",
   "scripts": {
     "build": "bun build.js",
     "dev": "bun --watch dev.js",

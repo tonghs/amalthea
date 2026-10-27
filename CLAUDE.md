@@ -38,6 +38,12 @@ bun run tran     # 增量翻译，token 在 ~/.config/webc.site.yml
 3. 手改译文前，先让源文案的变更跑完 `tran`。手改后的译文行数必须和源文件一致。
 4. 翻译后检查术语误译和零宽字符，检查命令见 `doc/i18n.md`。
 
+## 部署约束
+
+1. push 到 `main` 会自动部署到 GitHub Pages（`.github/workflows/deploy.yml`）。不要在 workflow 里加 `pull_request` 触发，否则未合并的 PR 也会被部署。
+2. 站点地址由 CI 通过 `SITE_URL` 注入，不要在代码里写死 github.io 地址。
+3. bun 版本以 `package.json` 的 `packageManager` 为准。升级 bun 时同时改这里。
+
 ## 代码约束
 
 1. 构建失败时不能留下残缺产物：校验放在 `rmSync(out)` 之前。

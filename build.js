@@ -30,16 +30,16 @@ export const missing = (src, t, path = []) =>
     : [];
 
 /*
-  root 项目根目录，out 输出目录
+  root 项目根目录，out 输出目录，site 站点地址（优先于 package.json 的 homepage，CI 部署时注入）
   每个语言渲染 <out>/<lang>/index.html，再渲染跳转用的根页 <out>/index.html
   返回 语言目录名列表（源语言在前）
 */
-const build = ({ root = import.meta.dirname, out = join(root, "dist") } = {}) => {
+const build = ({ root = import.meta.dirname, out = join(root, "dist"), site = process.env.SITE_URL } = {}) => {
   const read = (...p) => readFileSync(join(root, ...p), "utf8"),
     { from } = load(read("tran.yml")).tran,
     { homepage, brand } = JSON.parse(read("package.json")),
     // 补结尾斜杠，否则 new URL("en/", "https://a.com/site") 会丢掉 site
-    home = homepage?.replace(/\/?$/, "/"),
+    home = (site || homepage)?.replace(/\/?$/, "/"),
     codes = readdirSync(join(root, "i18n")).filter((c) => existsSync(join(root, "i18n", c, "site.yml"))),
     unknown = codes.filter((c) => !CODE.includes(c));
 

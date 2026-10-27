@@ -21,6 +21,8 @@
 | 根路径 `/` | JS 跳转（方案 B） | 用户指定 |
 | 暗色模式 | 三态：跟随系统 / 浅色 / 深色，单按钮循环 | 用户指定三态；320px 宽放不下 3 个并排按钮 |
 | 设计规范 | `DESIGN.md`，约束写在 `CLAUDE.md` | 用户要求 |
+| 部署 | GitHub Actions → GitHub Pages，只监听 push 到 main 和手动触发 | PR 合并即 push；`pull_request` 会部署未合并代码 |
+| 站点地址 | `SITE_URL` 优先于 `homepage`，CI 从 `configure-pages` 注入 | github.io 子路径和自定义域名都自动正确 |
 
 ## URL 结构
 

@@ -1,0 +1,55 @@
+# 构建静态站点并部署到 GitHub Pages
+# PR 合并进 main 也会产生 push 事件，所以只监听 push。不要加 pull_request，否则未合并的 PR 也会被部署
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同时只部署一次；不取消进行中的部署，避免线上停在半途状态
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      # 版本取自 package.json 的 packageManager，和本地一致
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: package.json
+
+      - run: bun install --frozen-lockfile
+
+      - run: bun test
+
+      # 读取 Pages 的真实地址（github.io 子路径或自定义域名）
+      - id: pages
+        uses: actions/configure-pages@v6
+
+      - run: bun run build
+        env:
+          SITE_URL: ${{ steps.pages.outputs.base_url }}
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

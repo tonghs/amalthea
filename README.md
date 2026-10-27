@@ -43,6 +43,7 @@ bun run tran     # 增量翻译（需要 token，见下文）
 ├── build.js               # 构建脚本
 ├── dev.js                 # 开发服务器
 ├── tran.yml               # 翻译配置：源语言和目标语言
+├── .github/workflows/     # GitHub Pages 自动部署
 ├── package.json           # homepage（站点地址）、brand（品牌名）
 ├── doc/i18n.md            # 翻译与语言管理详解
 ├── DESIGN.md              # 设计规范：断点、颜色、字体、间距、验收清单
@@ -73,7 +74,7 @@ dist/
 
 | 配置 | 位置 | 说明 |
 |---|---|---|
-| 站点地址 | `package.json` 的 `homepage` | 生成 `canonical` 和 `hreflang` 的绝对 URL。部署前必须改成真实地址，可以带子路径，例如 `https://a.com/site/` |
+| 站点地址 | 环境变量 `SITE_URL`，没有时用 `package.json` 的 `homepage` | 生成 `canonical` 和 `hreflang` 的绝对 URL，可以带子路径，例如 `https://a.com/site/`。部署到 GitHub Pages 时由 CI 自动注入 |
 | 品牌名 | `package.json` 的 `brand` | 不放进 yml，避免被翻译改写 |
 | 源语言、目标语言 | `tran.yml` | 见 [doc/i18n.md](doc/i18n.md) |
 
@@ -115,4 +116,19 @@ token: "your-api-token"
 
 ## 部署
 
-`dist/` 是纯静态文件，可以部署到任何静态托管，例如 GitHub Pages、Cloudflare Pages、Nginx。托管服务需要对目录请求返回 `index.html`，并给 `/en` 这类路径补上结尾斜杠。主流托管服务默认都会这样处理。
+### GitHub Pages（已配置）
+
+`.github/workflows/deploy.yml` 在以下情况自动部署：
+
+- push 到 `main`。PR 合并进 `main` 也属于这种情况。
+- 在 Actions 页面手动运行 Deploy。
+
+流程：安装依赖 → `bun test` → 构建 → 部署。测试或构建校验失败时停止部署，线上版本保持不变。CI 不运行翻译，译文以仓库里提交的为准。
+
+站点地址由 `actions/configure-pages` 读取，并通过 `SITE_URL` 注入构建。改仓库名或绑定自定义域名后，不需要改代码。
+
+首次使用前，必须在仓库的 Settings → Pages → Build and deployment → Source 中选择 **GitHub Actions**。
+
+### 其他静态托管
+
+`dist/` 是纯静态文件，可以部署到 Cloudflare Pages、Nginx 等任何静态托管。托管服务需要对目录请求返回 `index.html`，并给 `/en` 这类路径补上结尾斜杠。主流托管服务默认都会这样处理。构建时用 `SITE_URL=https://你的域名/ bun run build` 指定站点地址。

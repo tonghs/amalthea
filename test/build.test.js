@@ -5,6 +5,8 @@ import { join } from "node:path";
 import build, { missing } from "../build.js";
 
 const ROOT = join(import.meta.dirname, "..");
+// 测试不受外部 SITE_URL 影响，统一以 package.json 的 homepage 为准
+delete process.env.SITE_URL;
 let root, out;
 
 // 把项目输入拷到临时目录，测试改动不影响真实文件
@@ -122,6 +124,17 @@ describe("build", () => {
     build({ root, out });
     expect(html("en/index.html")).toContain('<link rel="canonical" href="https://a.com/site/en/">');
     expect(html("index.html")).toContain('<link rel="canonical" href="https://a.com/site/">');
+  });
+
+  test("site 参数优先于 homepage（CI 注入 SITE_URL）", () => {
+    build({ root, out, site: "https://tonghs.github.io/amalthea" });
+    expect(html("en/index.html")).toContain('<link rel="canonical" href="https://tonghs.github.io/amalthea/en/">');
+    expect(html("index.html")).toContain('hreflang="x-default" href="https://tonghs.github.io/amalthea/"');
+  });
+
+  test("site 为空字符串时回退到 homepage", () => {
+    build({ root, out, site: "" });
+    expect(html("en/index.html")).toContain('<link rel="canonical" href="https://example.com/en/">');
   });
 
   test("package.json 缺少 brand 时报错", () => {

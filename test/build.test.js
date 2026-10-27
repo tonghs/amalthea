@@ -10,23 +10,12 @@ const ROOT = join(import.meta.dirname, "..");
 delete process.env.SITE_URL;
 let root, out;
 
-// 把项目输入拷到临时目录，测试改动不影响真实文件
-beforeEach(() => {
-  root = mkdtempSync(join(tmpdir(), "amalthea-"));
-  out = join(root, "dist");
-  for (const p of ["src", "i18n", "public", "tran.yml", "package.json"]) {
-    cpSync(join(ROOT, p), join(root, p), { recursive: true });
-  }
-});
-
-afterEach(() => rmSync(root, { recursive: true, force: true }));
-
 const html = (p) => readFileSync(join(out, p), "utf8"),
   head = (p) => {
     const page = html(p);
     return page.slice(0, page.indexOf("</head>"));
   },
-  src = (p) => readFileSync(join(ROOT, "src", p), "utf8"),
+  srcFile = (p) => readFileSync(join(ROOT, "src", p), "utf8"),
   addLang = (code) => cpSync(join(root, "i18n/en"), join(root, "i18n", code), { recursive: true }),
   // 用 fn 修改 i18n/<code>/site.yml 的文案对象
   editYml = (code, fn) => {
@@ -34,6 +23,13 @@ const html = (p) => readFileSync(join(out, p), "utf8"),
       t = load(readFileSync(p, "utf8"));
     fn(t);
     writeFileSync(p, dump(t));
+  },
+  // 用 fn 修改 package.json 对象
+  editPkg = (fn) => {
+    const p = join(root, "package.json"),
+      pkg = JSON.parse(readFileSync(p, "utf8"));
+    fn(pkg);
+    writeFileSync(p, JSON.stringify(pkg));
   },
   count = (s, sub) => s.split(sub).length - 1;
 
@@ -58,9 +54,29 @@ describe("missing", () => {
   test("译文为空", () => {
     expect(missing({ a: 1 }, null)).toEqual(["a"]);
   });
+
+  test("译文只有键没有值（null）也算缺失", () => {
+    expect(missing({ a: 1 }, { a: null })).toEqual(["a"]);
+    expect(missing({ a: { b: 1 } }, { a: { b: null } })).toEqual(["a.b"]);
+  });
+
+  test("译文为空字符串不算缺失", () => {
+    expect(missing({ a: 1 }, { a: "" })).toEqual([]);
+  });
 });
 
 describe("build", () => {
+  // 把项目输入拷到临时目录，测试改动不影响真实文件
+  beforeEach(() => {
+    root = mkdtempSync(join(tmpdir(), "amalthea-"));
+    out = join(root, "dist");
+    for (const p of ["src", "i18n", "public", "tran.yml", "package.json"]) {
+      cpSync(join(ROOT, p), join(root, p), { recursive: true });
+    }
+  });
+
+  afterEach(() => rmSync(root, { recursive: true, force: true }));
+
   test("源语言排第 1，其余按 @3-/lang 顺序", () => {
     expect(build({ root, out })).toEqual(["zh", "en", "ja"]);
   });
@@ -72,7 +88,7 @@ describe("build", () => {
     }
   });
 
-  test("语言页包含 lang、标题、hreflang 和语言记忆", () => {
+  test("语言页包含 lang、标题和 hreflang", () => {
     build({ root, out });
     const en = html("en/index.html");
     expect(en).toContain('<html lang="en" dir="ltr">');
@@ -80,7 +96,6 @@ describe("build", () => {
     expect(en).toContain('<link rel="canonical" href="https://example.com/en/">');
     expect(en).toContain('<link rel="alternate" hreflang="ja" href="https://example.com/ja/">');
     expect(en).toContain('<link rel="alternate" hreflang="x-default" href="https://example.com/">');
-    expect(en).toContain('localStorage.lang="en"');
     expect(en).toContain('data-title="Theme: "');
     expect(en).toContain("© " + new Date().getFullYear() + " Amalthea");
   });
@@ -110,8 +125,8 @@ describe("build", () => {
 
   test("语言页 head 原样内联 theme.js 和 page.js，theme.js 在前", () => {
     build({ root, out });
-    const themeJs = src("theme.js"),
-      pageJs = src("page.js");
+    const themeJs = srcFile("theme.js"),
+      pageJs = srcFile("page.js");
     for (const p of ["zh/index.html", "en/index.html", "ja/index.html"]) {
       const h = head(p);
       expect(h).toContain(themeJs);
@@ -123,8 +138,8 @@ describe("build", () => {
   test("根页 head 原样内联 theme.js，不含 page.js", () => {
     build({ root, out });
     const h = head("index.html");
-    expect(h).toContain(src("theme.js"));
-    expect(html("index.html")).not.toContain(src("page.js"));
+    expect(h).toContain(srcFile("theme.js"));
+    expect(html("index.html")).not.toContain(srcFile("page.js"));
   });
 
   test("语言页的主题按钮带翻译文案，默认隐藏等 JS 显示", () => {
@@ -175,12 +190,10 @@ describe("build", () => {
     expect(count(index, "<script")).toBe(1);
   });
 
-  test("根页包含跳转脚本和所有语言链接", () => {
+  test("根页使用源语言、列出所有语言链接、不记住语言", () => {
     build({ root, out });
     const index = html("index.html");
     expect(index).toContain('<html lang="zh" dir="ltr">');
-    expect(index).toContain('["zh","en","ja"]');
-    expect(index).toContain("location.replace(");
     expect(index).not.toContain("localStorage.lang=");
     expect(index).toContain('<a href="ja/" hreflang="ja" lang="ja">日本語</a>');
   });
@@ -195,15 +208,13 @@ describe("build", () => {
   });
 
   test("homepage 带子路径时生成正确的绝对 URL", () => {
-    const pkg = join(root, "package.json");
-    writeFileSync(pkg, readFileSync(pkg, "utf8").replace("https://example.com/", "https://a.com/site/"));
+    editPkg((pkg) => (pkg.homepage = "https://a.com/site/"));
     build({ root, out });
     expect(html("en/index.html")).toContain('<link rel="canonical" href="https://a.com/site/en/">');
   });
 
   test("homepage 没有结尾斜杠时自动补上", () => {
-    const pkg = join(root, "package.json");
-    writeFileSync(pkg, readFileSync(pkg, "utf8").replace("https://example.com/", "https://a.com/site"));
+    editPkg((pkg) => (pkg.homepage = "https://a.com/site"));
     build({ root, out });
     expect(html("en/index.html")).toContain('<link rel="canonical" href="https://a.com/site/en/">');
     expect(html("index.html")).toContain('<link rel="canonical" href="https://a.com/site/">');
@@ -215,14 +226,23 @@ describe("build", () => {
     expect(html("index.html")).toContain('hreflang="x-default" href="https://tonghs.github.io/amalthea/"');
   });
 
+  test("不传 site 时读取环境变量 SITE_URL", () => {
+    process.env.SITE_URL = "https://a.com/x";
+    try {
+      build({ root, out });
+    } finally {
+      delete process.env.SITE_URL;
+    }
+    expect(html("en/index.html")).toContain('<link rel="canonical" href="https://a.com/x/en/">');
+  });
+
   test("site 为空字符串时回退到 homepage", () => {
     build({ root, out, site: "" });
     expect(html("en/index.html")).toContain('<link rel="canonical" href="https://example.com/en/">');
   });
 
   test("package.json 缺少 brand 时报错", () => {
-    const pkg = join(root, "package.json");
-    writeFileSync(pkg, readFileSync(pkg, "utf8").replace(/"brand": ".*",\n/, ""));
+    editPkg((pkg) => delete pkg.brand);
     expect(() => build({ root, out })).toThrow("package.json 必须配置 homepage 和 brand");
   });
 
@@ -231,6 +251,20 @@ describe("build", () => {
     addLang("xx");
     expect(() => build({ root, out })).toThrow();
     expect(existsSync(join(out, "en/index.html"))).toBe(true);
+  });
+
+  test("根页模板运行出错时报错，保留旧产物", () => {
+    build({ root, out });
+    writeFileSync(join(root, "src/root.pug"), "extends layout\n\nblock body\n  p= undefinedVar.x\n");
+    expect(() => build({ root, out })).toThrow("undefinedVar");
+    for (const p of ["index.html", "en/index.html", "favicon.svg"]) expect(existsSync(join(out, p))).toBe(true);
+  });
+
+  test("语言页模板语法错误时报错，保留旧产物", () => {
+    build({ root, out });
+    writeFileSync(join(root, "src/index.pug"), "div(\n");
+    expect(() => build({ root, out })).toThrow("index.pug");
+    for (const p of ["index.html", "en/index.html", "favicon.svg"]) expect(existsSync(join(out, p))).toBe(true);
   });
 
   test("忽略没有 site.yml 的目录（如翻译缓存 .cache）", () => {
@@ -246,8 +280,13 @@ describe("build", () => {
   });
 
   test("译文缺键时报错并提示运行 tran", () => {
+    editYml("ja", (t) => delete t.lang);
+    expect(() => build({ root, out })).toThrow("i18n/ja/site.yml 缺少 lang，请运行 bun run tran");
+  });
+
+  test("译文某键只写键没写值时报错并提示运行 tran", () => {
     const p = join(root, "i18n/ja/site.yml");
-    writeFileSync(p, readFileSync(p, "utf8").replace(/^lang:.*\n/m, ""));
+    writeFileSync(p, readFileSync(p, "utf8").replace(/^lang:.*$/m, "lang:"));
     expect(() => build({ root, out })).toThrow("i18n/ja/site.yml 缺少 lang，请运行 bun run tran");
   });
 

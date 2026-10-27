@@ -42,16 +42,19 @@
 
 - 每页都有 `canonical`，以及每个语言的 `hreflang` 链接。
 - `x-default` 指向根页。
-- `hreflang` 必须用绝对 URL。站点地址取自 `package.json` 的 `homepage`。
+- `hreflang` 必须用绝对 URL。站点地址优先取环境变量 `SITE_URL`（CI 注入），没有时取 `package.json` 的 `homepage`。
 - `iw` 输出为 `he`，因为 `iw` 是已废弃的 BCP 47 代码。
 - ar、fa、ur、iw、sd 加 `dir="rtl"`。
 
 ## 构建校验
 
-出现以下情况时，构建直接失败，不输出残缺页面：
+出现以下情况时，构建直接失败，不清空 `dist/`，上一次的产物保持不变：
 
-- 译文缺少源语言 yml 中的键（提示运行 `bun run tran`）。
+- `package.json` 缺少 `homepage`（且没有 `SITE_URL`）或 `brand`。
+- 译文缺少源语言 yml 中的键，或键的值为空（提示运行 `bun run tran`）。
 - `i18n/` 下的目录名不是 `@3-/lang` 支持的语言代码。
+- 缺少源语言文案。
+- 模板渲染出错。所有页面先渲染到内存，全部成功后才清空 `dist/` 并写盘。
 
 ## 翻译规则（实测得出）
 

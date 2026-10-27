@@ -1,0 +1,21 @@
+description: Gumamit ng yml upang magsulat ng kopya, gumamit ng pug upang magsulat ng mga template, at bumuo ng isang static na pahina sa bawat wika.
+lang: lumipat ng wika
+close: pagsasara
+theme:
+  title: tema
+  system: Sundin ang sistema
+  light: liwanag na kulay
+  dark: Madilim
+hero:
+  title: Isang kopya, maraming wika
+  desc: Gumamit ng yml upang magsulat ng kopya at pug upang magsulat ng mga template. Pagkatapos buuin, makakakuha ka ng isang purong static na pahina sa bawat wika.
+  cta: Tingnan ang mga tampok
+features:
+  title: Mga Highlight ng Tampok
+  li:
+    - title: Ang copywriting ay configuration
+      desc: Ang copywriting at mga template ay pinaghihiwalay. Hindi mo kailangang pindutin ang code para baguhin ang kopya.
+    - title: awtomatikong pagsasalin
+      desc: Tanging kopya ng Chinese ang pinananatili, at maaari itong unti-unting isalin sa ibang mga wika na may isang utos.
+    - title: zero runtime
+      desc: Naglalabas lamang ng HTML at CSS at maaaring i-deploy sa anumang static na pagho-host.

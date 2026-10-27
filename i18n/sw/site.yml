@@ -1,0 +1,21 @@
+description: Tumia yml kuandika nakala, tumia pug kuandika violezo, na ujenge ukurasa tuli katika kila lugha.
+lang: kubadili lugha
+close: kufungwa
+theme:
+  title: mandhari
+  system: Fuata mfumo
+  light: rangi nyepesi
+  dark: Giza
+hero:
+  title: Nakala moja, lugha nyingi
+  desc: Tumia yml kuandika nakala na pug kuandika violezo. Baada ya kujenga, unapata ukurasa tuli kwa kila lugha.
+  cta: Tazama vipengele
+features:
+  title: Vivutio vya Kipengele
+  li:
+    - title: Uandishi wa nakala ni usanidi
+      desc: Uandishi wa nakala na violezo vimetenganishwa. Huhitaji kugusa msimbo ili kubadilisha nakala.
+    - title: tafsiri ya moja kwa moja
+      desc: Nakala ya Kichina pekee ndiyo inadumishwa, na inaweza kutafsiriwa katika lugha zingine kwa amri moja.
+    - title: sifuri wakati wa kukimbia
+      desc: Matokeo ya HTML na CSS pekee na yanaweza kutumwa kwa upangishaji tuli wowote.

@@ -1,0 +1,21 @@
+description: Uporabite yml za pisanje kopije, uporabite pug za pisanje predlog in ustvarite statično stran v vsakem jeziku.
+lang: preklopi jezik
+close: zaprtje
+theme:
+  title: tema
+  system: Sledite sistemu
+  light: svetle barve
+  dark: Temno
+hero:
+  title: En izvod, več jezikov
+  desc: Uporabite yml za pisanje kopij in pug za pisanje predlog. Po izgradnji dobite povsem statično stran za vsak jezik.
+  cta: Oglejte si funkcije
+features:
+  title: Poudarki funkcij
+  li:
+    - title: Pisanje besedil je konfiguracija
+      desc: Pisanje besedil in predloge sta ločena. Za spremembo kopije se vam ni treba dotakniti kode.
+    - title: samodejno prevajanje
+      desc: Ohranja se samo kitajska kopija, ki jo je mogoče postopoma prevesti v druge jezike z enim samim ukazom.
+    - title: ničelni čas delovanja
+      desc: Izpiše samo HTML in CSS in ga je mogoče namestiti na katero koli statično gostovanje.

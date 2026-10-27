@@ -1,0 +1,21 @@
+description: Defnyddiwch yml i ysgrifennu copi, defnyddio pug i ysgrifennu templedi, ac adeiladu tudalen statig yn y ddwy iaith.
+lang: newid iaith
+close: gau
+theme:
+  title: thema
+  system: Dilynwch y system
+  light: lliw golau
+  dark: Tywyll
+hero:
+  title: Un copi, llawer o ieithoedd
+  desc: Defnyddiwch yml i ysgrifennu copi a phug i ysgrifennu templedi. Ar ôl adeiladu, byddwch yn cael tudalen hollol statig fesul iaith.
+  cta: Gweld nodweddion
+features:
+  title: Uchafbwyntiau Nodwedd
+  li:
+    - title: Ffurfweddiad yw ysgrifennu copi
+      desc: Mae ysgrifennu copi a thempledi wedi'u gwahanu. Nid oes angen i chi gyffwrdd â'r cod i newid y copi.
+    - title: cyfieithu awtomatig
+      desc: Dim ond copi Tsieineaidd sy'n cael ei gynnal, a gellir ei gyfieithu'n gynyddol i ieithoedd eraill gydag un gorchymyn.
+    - title: amser rhedeg sero
+      desc: Allbynnau HTML a CSS yn unig a gellir eu defnyddio i unrhyw westeiwr statig.

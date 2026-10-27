@@ -1,0 +1,21 @@
+description: Utilitzeu yml per escriure còpies, utilitzeu pug per escriure plantilles i creeu una pàgina estàtica en cada idioma.
+lang: canviar d'idioma
+close: tancament
+theme:
+  title: tema
+  system: Seguiu el sistema
+  light: color clar
+  dark: Fosc
+hero:
+  title: Una còpia, molts idiomes
+  desc: Utilitzeu yml per escriure una còpia i pug per escriure plantilles. Després de la creació, obteniu una pàgina purament estàtica per idioma.
+  cta: Mostra les característiques
+features:
+  title: Característiques destacades
+  li:
+    - title: La redacció és configuració
+      desc: La redacció i les plantilles estan separades. No cal que toqueu el codi per canviar la còpia.
+    - title: traducció automàtica
+      desc: Només es manté una còpia xinesa i es pot traduir de manera incremental a altres idiomes amb una sola comanda.
+    - title: temps d'execució zero
+      desc: Només produeix HTML i CSS i es pot implementar a qualsevol allotjament estàtic.

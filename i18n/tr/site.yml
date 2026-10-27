@@ -1,0 +1,21 @@
+description: Kopya yazmak için yml'yi kullanın, şablonlar yazmak için pug'u kullanın ve her dilde statik bir sayfa oluşturun.
+lang: dili değiştir
+close: kapanış
+theme:
+  title: tema
+  system: Sistemi takip edin
+  light: açık renk
+  dark: Karanlık
+hero:
+  title: Bir kopya, birçok dil
+  desc: Kopya yazmak için yml'yi, şablon yazmak için ise pug'u kullanın. Oluşturduktan sonra dil başına tamamen statik bir sayfa elde edersiniz.
+  cta: Özellikleri görüntüle
+features:
+  title: Öne Çıkan Özellikler
+  li:
+    - title: Metin yazarlığı yapılandırmadır
+      desc: Metin yazarlığı ve şablonlar ayrılmıştır. Kopyayı değiştirmek için koda dokunmanıza gerek yoktur.
+    - title: otomatik çeviri
+      desc: Yalnızca Çince kopyası korunur ve tek komutla artımlı olarak diğer dillere çevrilebilir.
+    - title: sıfır çalışma zamanı
+      desc: Yalnızca HTML ve CSS çıktısı verir ve herhangi bir statik barındırma birimine dağıtılabilir.

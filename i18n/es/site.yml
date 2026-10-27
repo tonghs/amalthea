@@ -1,0 +1,21 @@
+description: Utilice yml para escribir textos, utilice pug para escribir plantillas y cree una página estática en cada idioma.
+lang: cambiar de idioma
+close: cierre
+theme:
+  title: tema
+  system: Sigue el sistema
+  light: color claro
+  dark: Oscuro
+hero:
+  title: Una copia, muchos idiomas
+  desc: Utilice yml para escribir textos y pug para escribir plantillas. Después de construir, obtienes una página puramente estática por idioma.
+  cta: Ver características
+features:
+  title: Características destacadas
+  li:
+    - title: La redacción publicitaria es configuración.
+      desc: La redacción publicitaria y las plantillas están separadas. No es necesario tocar el código para cambiar la copia.
+    - title: traducción automática
+      desc: Solo se mantiene la copia en chino y se puede traducir incrementalmente a otros idiomas con un solo comando.
+    - title: tiempo de ejecución cero
+      desc: Solo genera HTML y CSS y se puede implementar en cualquier alojamiento estático.

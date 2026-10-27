@@ -1,0 +1,21 @@
+description: Naudokite yml norėdami rašyti kopiją, naudokite mopsą šablonams rašyti ir sukurkite statinį puslapį kiekviena kalba.
+lang: pakeisti kalbą
+close: uždarymas
+theme:
+  title: tema
+  system: Sekite sistemą
+  light: šviesios spalvos
+  dark: Tamsus
+hero:
+  title: Vienas egzempliorius, daug kalbų
+  desc: Naudokite yml norėdami rašyti copy, o mopsas – šablonams rašyti. Sukūrę kiekvieną kalbą gausite tik statinį puslapį.
+  cta: Peržiūrėti funkcijas
+features:
+  title: Funkcijų akcentai
+  li:
+    - title: Copywriting yra konfigūracija
+      desc: Tekstų rašymas ir šablonai yra atskirti. Norint pakeisti kopiją, kodo liesti nereikia.
+    - title: automatinis vertimas
+      desc: Išlaikoma tik kinų kalba, kurią galima palaipsniui išversti į kitas kalbas viena komanda.
+    - title: nulinis vykdymo laikas
+      desc: Išveda tik HTML ir CSS ir gali būti įdiegtas bet kuriame statiniame priegloboje.

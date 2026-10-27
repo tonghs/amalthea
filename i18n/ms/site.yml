@@ -1,0 +1,21 @@
+description: Gunakan yml untuk menulis salinan, gunakan pug untuk menulis templat dan bina halaman statik dalam setiap bahasa.
+lang: tukar bahasa
+close: penutupan
+theme:
+  title: tema
+  system: Ikut sistem
+  light: warna terang
+  dark: Gelap
+hero:
+  title: Satu salinan, banyak bahasa
+  desc: Gunakan yml untuk menulis salinan dan pug untuk menulis templat. Selepas membina, anda mendapat halaman statik semata-mata bagi setiap bahasa.
+  cta: Lihat ciri
+features:
+  title: Sorotan Ciri
+  li:
+    - title: Copywriting ialah konfigurasi
+      desc: Copywriting dan templat diasingkan. Anda tidak perlu menyentuh kod untuk menukar salinan.
+    - title: terjemahan automatik
+      desc: Hanya salinan bahasa Cina yang dikekalkan, dan ia boleh diterjemahkan secara berperingkat ke dalam bahasa lain dengan satu arahan.
+    - title: masa jalan sifar
+      desc: Output hanya HTML dan CSS dan boleh digunakan untuk mana-mana pengehosan statik.

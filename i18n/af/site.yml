@@ -1,0 +1,21 @@
+description: Gebruik yml om kopie te skryf, gebruik pug om sjablone te skryf, en bou 'n statiese bladsy in elke taal.
+lang: taal verander
+close: sluiting
+theme:
+  title: tema
+  system: Volg die stelsel
+  light: ligte kleur
+  dark: Donker
+hero:
+  title: Een kopie, baie tale
+  desc: Gebruik yml om kopie te skryf en pug om sjablone te skryf. Nadat u gebou het, kry u 'n suiwer statiese bladsy per taal.
+  cta: Bekyk kenmerke
+features:
+  title: Kenmerkhoogtepunte
+  li:
+    - title: Kopieskryf is konfigurasie
+      desc: Kopieskryf en sjablone word geskei. Jy hoef nie aan die kode te raak om die kopie te verander nie.
+    - title: outomatiese vertaling
+      desc: Slegs Chinese kopie word gehandhaaf, en dit kan inkrementeel in ander tale vertaal word met 'n enkele opdrag.
+    - title: nul looptyd
+      desc: Voer slegs HTML en CSS uit en kan na enige statiese hosting ontplooi word.

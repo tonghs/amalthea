@@ -1,0 +1,21 @@
+description: Kasutage koopia kirjutamiseks yml-i, mallide kirjutamiseks pug-i ja looge igas keeles staatiline leht.
+lang: keelt vahetada
+close: sulgemine
+theme:
+  title: teema
+  system: Järgige süsteemi
+  light: heledat värvi
+  dark: Tume
+hero:
+  title: Üks eksemplar, mitu keelt
+  desc: Kasutage yml-i copy ja pug-i mallide kirjutamiseks. Pärast ehitamist saate iga keele kohta puhtalt staatilise lehe.
+  cta: Vaata funktsioone
+features:
+  title: Funktsiooni esiletõstmised
+  li:
+    - title: Copywriting on konfiguratsioon
+      desc: Copywriting ja mallid on eraldatud. Koopia muutmiseks ei pea te koodi puudutama.
+    - title: automaatne tõlge
+      desc: Säilitatakse ainult hiina koopia ja seda saab ühe käsuga järk-järgult tõlkida teistesse keeltesse.
+    - title: null käitusaeg
+      desc: Väljastab ainult HTML-i ja CSS-i ning seda saab juurutada mis tahes staatilises hostimises.

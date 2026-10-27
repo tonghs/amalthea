@@ -1,0 +1,21 @@
+description: Brug yml til at skrive kopi, brug pug til at skrive skabeloner, og opbyg en statisk side på hvert sprog.
+lang: skifte sprog
+close: lukning
+theme:
+  title: tema
+  system: Følg systemet
+  light: lys farve
+  dark: Mørk
+hero:
+  title: Ét eksemplar, mange sprog
+  desc: Brug yml til at skrive kopi og pug til at skrive skabeloner. Efter opbygning får du en rent statisk side pr. sprog.
+  cta: Se funktioner
+features:
+  title: Funktionshøjdepunkter
+  li:
+    - title: Copywriting er konfiguration
+      desc: Copywriting og skabeloner er adskilt. Du behøver ikke trykke på koden for at ændre kopien.
+    - title: automatisk oversættelse
+      desc: Kun kinesisk kopi vedligeholdes, og den kan trinvist oversættes til andre sprog med en enkelt kommando.
+    - title: nul køretid
+      desc: Udsender kun HTML og CSS og kan implementeres til enhver statisk hosting.

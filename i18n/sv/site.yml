@@ -1,0 +1,21 @@
+description: Använd yml för att skriva kopia, använd pug för att skriva mallar och bygg en statisk sida på varje språk.
+lang: byta språk
+close: stängning
+theme:
+  title: tema
+  system: Följ systemet
+  light: ljus färg
+  dark: Mörk
+hero:
+  title: Ett exemplar, många språk
+  desc: Använd yml för att skriva kopia och mops för att skriva mallar. Efter byggandet får du en rent statisk sida per språk.
+  cta: Visa funktioner
+features:
+  title: Funktionshöjdpunkter
+  li:
+    - title: Copywriting är konfiguration
+      desc: Copywriting och mallar är separerade. Du behöver inte trycka på koden för att ändra kopian.
+    - title: automatisk översättning
+      desc: Endast kinesisk kopia bibehålls, och den kan stegvis översättas till andra språk med ett enda kommando.
+    - title: noll körtid
+      desc: Matar bara ut HTML och CSS och kan distribueras till alla statiska värdar.

@@ -1,0 +1,21 @@
+description: Erabili yml kopia idazteko, erabili pug txantiloiak idazteko eta sortu orrialde estatiko bat hizkuntza bakoitzean.
+lang: hizkuntza aldatu
+close: itxiera
+theme:
+  title: gaia
+  system: Jarraitu sistema
+  light: kolore argia
+  dark: Iluna
+hero:
+  title: Ale bat, hizkuntza asko
+  desc: Erabili yml kopia idazteko eta pug txantiloiak idazteko. Eraiki ondoren, hizkuntza bakoitzeko orrialde estatiko hutsa lortzen duzu.
+  cta: Ikusi ezaugarriak
+features:
+  title: Ezaugarri nabarmenenak
+  li:
+    - title: Copywriting konfigurazioa da
+      desc: Copywriting eta txantiloiak bereizten dira. Ez duzu kodea ukitu behar kopia aldatzeko.
+    - title: itzulpen automatikoa
+      desc: Txinako kopia bakarrik mantentzen da, eta komando bakar batekin beste hizkuntza batzuetara itzul daiteke.
+    - title: zero exekuzio-denbora
+      desc: HTML eta CSS soilik ateratzen ditu eta edozein ostalaritza estatikotan zabaldu daiteke.

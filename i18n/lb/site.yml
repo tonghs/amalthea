@@ -1,0 +1,21 @@
+description: Benotzt yml fir Kopie ze schreiwen, benotzt Pug fir Templates ze schreiwen, a bauen eng statesch Säit an all Sprooch.
+lang: Sprooch wiesselen
+close: Ofschloss
+theme:
+  title: Thema
+  system: Follegt de System
+  light: hell Faarf
+  dark: Däischter
+hero:
+  title: Eng Kopie, vill Sproochen
+  desc: Benotzt yml fir Kopie ze schreiwen a Pug fir Templates ze schreiwen. Nom Bau kritt Dir eng reng statesch Säit pro Sprooch.
+  cta: View Fonctiounen
+features:
+  title: Feature Highlights
+  li:
+    - title: Copywriting ass Konfiguratioun
+      desc: Copywriting a Template sinn getrennt. Dir musst de Code net beréieren fir d'Kopie z'änneren.
+    - title: automatesch Iwwersetzung
+      desc: Nëmmen Chinesesch Kopie gëtt erhale gelooss, an et kann inkrementell an aner Sprooche mat engem eenzege Kommando iwwersat ginn.
+    - title: null Runtime
+      desc: Gitt nëmmen HTML an CSS aus a kann op all statesch Hosting ofgesat ginn.

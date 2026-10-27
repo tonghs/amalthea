@@ -1,0 +1,21 @@
+description: Sử dụng yml để viết bản sao, sử dụng pug để viết mẫu và tạo một trang tĩnh bằng mỗi ngôn ngữ.
+lang: chuyển đổi ngôn ngữ
+close: đóng cửa
+theme:
+  title: chủ đề
+  system: Theo dõi hệ thống
+  light: màu sáng
+  dark: Tối tăm
+hero:
+  title: Một bản sao, nhiều ngôn ngữ
+  desc: Sử dụng yml để viết bản sao và pug để viết mẫu. Sau khi xây dựng, bạn sẽ có được một trang hoàn toàn tĩnh cho mỗi ngôn ngữ.
+  cta: Xem tính năng
+features:
+  title: Tính năng nổi bật
+  li:
+    - title: Copywriting là cấu hình
+      desc: Viết quảng cáo và mẫu được tách biệt. Bạn không cần chạm vào mã để thay đổi bản sao.
+    - title: dịch tự động
+      desc: Chỉ có bản sao tiếng Trung được duy trì và nó có thể được dịch dần dần sang các ngôn ngữ khác chỉ bằng một lệnh duy nhất.
+    - title: thời gian chạy bằng không
+      desc: Chỉ xuất ra HTML và CSS và có thể được triển khai cho bất kỳ dịch vụ lưu trữ tĩnh nào.

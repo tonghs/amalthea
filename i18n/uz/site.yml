@@ -1,0 +1,21 @@
+description: Nusxa yozish uchun yml-dan foydalaning, shablonlarni yozish uchun pug-dan foydalaning va har bir tilda statik sahifa yarating.
+lang: tilni almashtirish
+close: yopilish
+theme:
+  title: mavzu
+  system: Tizimga rioya qiling
+  light: ochiq rang
+  dark: Qorong'i
+hero:
+  title: Bitta nusxa, ko'p tillar
+  desc: Nusxa yozish uchun yml va shablonlarni yozish uchun pug dan foydalaning. Qurgandan so'ng, har bir til uchun faqat statik sahifa olasiz.
+  cta: Xususiyatlarni ko'rish
+features:
+  title: Xususiyatning diqqatga sazovor joylari
+  li:
+    - title: Kopirayter - bu konfiguratsiya
+      desc: Kopirayter va andozalar ajratilgan. Nusxani o'zgartirish uchun kodga teginishingiz shart emas.
+    - title: avtomatik tarjima
+      desc: Faqat xitoycha nusxa saqlanadi va uni bitta buyruq bilan bosqichma-bosqich boshqa tillarga tarjima qilish mumkin.
+    - title: nol ish vaqti
+      desc: Faqat HTML va CSS-ni chiqaradi va har qanday statik hostingga joylashtirilishi mumkin.

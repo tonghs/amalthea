@@ -1,0 +1,21 @@
+description: 用 yml 寫文案，用 pug 寫模板，每種語言建構出一個靜態頁面。
+lang: 切換語言
+close: 關閉
+theme:
+  title: 主題
+  system: 跟隨系統
+  light: 淺色
+  dark: 深色
+hero:
+  title: 一份文案，多種語言
+  desc: 用 yml 寫文案，用 pug 寫模板。建置後，每種語言得到一個純靜態頁面。
+  cta: 查看功能
+features:
+  title: 功能亮點
+  li:
+    - title: 文案即配置
+      desc: 文案和模板分開。改文案不用碰代碼。
+    - title: 自動翻譯
+      desc: 只維護中文文案，一條指令就能增量翻譯成其他語言。
+    - title: 零運轉時
+      desc: 只輸出 HTML 和 CSS，可以部署到任何靜態託管。

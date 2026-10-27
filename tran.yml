@@ -1,0 +1,5 @@
+tran:
+  from: zh
+  to_li: [en, ja]
+dir:
+  - i18n

@@ -1,0 +1,442 @@
+/* 规范见 DESIGN.md。只用下面的 token，不要写裸数值 */
+:root {
+  color-scheme: light dark;
+
+  /* 颜色：light-dark(亮, 暗)。对比度见 DESIGN.md */
+  --fg: light-dark(#1c1917, #f5f5f4);
+  --muted: light-dark(#57534e, #a8a29e);
+  --bg: light-dark(#fafaf9, #0c0a09);
+  --card: light-dark(#fff, #1c1917);
+  --line: light-dark(#e7e5e4, #292524);
+  --accent: #c2410c;
+  --accent-hover: #9a3412;
+  --accent-text: light-dark(#c2410c, #fb923c);
+  --on-accent: #fff;
+  /* light-dark() 只接受颜色，所以只把阴影颜色做成 token */
+  --shadow-color: light-dark(rgb(0 0 0 / 0.08), rgb(0 0 0 / 0.5));
+
+  /* 字号：在 375px 到 1280px 之间线性缩放 */
+  --fs-display: clamp(2.25rem, 1.732rem + 2.21vw, 3.5rem);
+  --fs-h2: clamp(1.625rem, 1.47rem + 0.663vw, 2rem);
+  --fs-h3: clamp(1.125rem, 1.073rem + 0.221vw, 1.25rem);
+  --fs-lead: clamp(1.0625rem, 1.011rem + 0.221vw, 1.1875rem);
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+
+  /* 字重 */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* 行高、字距、行长：按文字体系覆盖，见下方 :lang() */
+  --lh-body: 1.6;
+  --lh-tight: 1.2;
+  --lh-heading: 1.3;
+  --ls-heading: -0.02em;
+  --measure: 68ch;
+
+  /* 间距：4px 基数 */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+
+  /* 布局 */
+  --gutter: 20px;
+  --content: 1080px;
+  --section: var(--s-8);
+  --grid-gap: var(--s-4);
+  --tap: 44px;
+
+  /* 圆角 */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-full: 999px;
+
+  /* 动效 */
+  --dur: 160ms;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* 中日韩：行高加大，不收紧字距，行长按字数算 */
+:root:lang(zh),
+:root:lang(ja),
+:root:lang(ko) {
+  --lh-body: 1.75;
+  --ls-heading: 0;
+  --measure: 40em;
+}
+
+/* 阿拉伯、婆罗米、东南亚文字：字形有上下附标或连写，行高更大，不改字距 */
+:root:is(:lang(ar), :lang(fa), :lang(ur), :lang(sd), :lang(hi), :lang(mr), :lang(ne), :lang(bn), :lang(as), :lang(gu), :lang(kn), :lang(or), :lang(ta), :lang(te), :lang(si), :lang(th), :lang(lo), :lang(km), :lang(my)) {
+  --lh-body: 1.8;
+  --ls-heading: 0;
+}
+
+/* pad */
+@media (width >= 768px) {
+  :root {
+    --gutter: var(--s-6);
+  }
+}
+
+/* desktop */
+@media (width >= 1024px) {
+  :root {
+    --section: var(--s-9);
+    --grid-gap: var(--s-5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur: 0ms;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font: var(--fw-regular) var(--fs-body) / var(--lh-body) t, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--fg);
+  background: var(--bg);
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: var(--ls-heading);
+  text-wrap: balance;
+  /* 按词组断行，避免日文把一个词拆到两行 */
+  word-break: auto-phrase;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+p + p {
+  margin-top: 1em;
+}
+
+strong {
+  font-weight: var(--fw-semibold);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+svg {
+  flex-shrink: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+.wrap {
+  width: 100%;
+  max-width: calc(var(--content) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* 顶栏 */
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding-block: var(--s-3);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: var(--tap);
+  margin-inline-end: auto;
+  font-weight: var(--fw-semibold);
+}
+
+/* 顶栏按钮：语言切换、主题切换 */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-1);
+  min-width: var(--tap);
+  height: var(--tap);
+  padding-inline: var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  color: var(--muted);
+  background: none;
+  cursor: pointer;
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+
+.theme {
+  padding: 0;
+}
+
+.theme[hidden] {
+  display: none;
+}
+
+/* 当前主题对应的图标：无 data-theme 表示跟随系统 */
+.theme svg {
+  display: none;
+}
+
+:root:not([data-theme]) .i-system,
+:root[data-theme="light"] .i-light,
+:root[data-theme="dark"] .i-dark {
+  display: block;
+}
+
+/* 语言切换：details 下拉，75 种语言时可滚动 */
+.lang {
+  position: relative;
+  min-width: 0;
+}
+
+.lang summary {
+  list-style: none;
+}
+
+.lang summary::-webkit-details-marker {
+  display: none;
+}
+
+.lang summary span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lang[open] .i-caret {
+  rotate: 180deg;
+}
+
+.i-caret {
+  transition: rotate var(--dur) var(--ease);
+}
+
+.lang ul {
+  position: absolute;
+  inset-inline-end: 0;
+  top: calc(100% + var(--s-2));
+  z-index: 10;
+  min-width: 180px;
+  max-height: min(60vh, 480px);
+  overflow-y: auto;
+  padding: var(--s-1);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: 0 8px 24px var(--shadow-color);
+}
+
+.lang a {
+  display: flex;
+  align-items: center;
+  min-height: var(--tap);
+  padding-inline: var(--s-3);
+  border-radius: var(--r-sm);
+  white-space: nowrap;
+}
+
+.lang a[aria-current] {
+  color: var(--accent-text);
+  font-weight: var(--fw-semibold);
+}
+
+main {
+  flex: 1;
+}
+
+/* 首屏 */
+.hero {
+  padding-block: var(--section) calc(var(--section) * 0.75);
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: var(--fs-display);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+}
+
+.hero p {
+  max-width: var(--measure);
+  margin: var(--s-5) auto 0;
+  font-size: var(--fs-lead);
+  line-height: var(--lh-body);
+  color: var(--muted);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  margin-top: var(--s-6);
+  padding-inline: var(--s-6);
+  border-radius: var(--r-full);
+  font-weight: var(--fw-semibold);
+  color: var(--on-accent);
+  background: var(--accent);
+  transition: background-color var(--dur) var(--ease);
+}
+
+.cta:active {
+  background: var(--accent-hover);
+}
+
+/* 特性 */
+.features {
+  padding-block: calc(var(--section) * 0.5) var(--section);
+}
+
+.features h2 {
+  margin-bottom: var(--s-6);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  text-align: center;
+}
+
+.features ul {
+  display: grid;
+  gap: var(--grid-gap);
+}
+
+@media (width >= 768px) {
+  .features ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.features li {
+  padding: var(--s-5);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+}
+
+.features h3 {
+  margin-bottom: var(--s-2);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+}
+
+.features p {
+  color: var(--muted);
+}
+
+footer {
+  padding-block: var(--s-6);
+  font-size: var(--fs-small);
+  text-align: center;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+}
+
+/* 根页：JS 跳转前的兜底语言列表 */
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-5);
+  padding-block: var(--section);
+}
+
+.root h1 {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+}
+
+.root ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-1) var(--s-4);
+}
+
+.root a {
+  display: flex;
+  align-items: center;
+  min-height: var(--tap);
+  padding-inline: var(--s-2);
+  color: var(--accent-text);
+}
+
+/* hover 只给能悬停的设备，避免触屏上粘住 */
+@media (hover: hover) {
+  .btn:hover {
+    color: var(--fg);
+    border-color: var(--muted);
+  }
+
+  .lang a:hover {
+    background: var(--bg);
+  }
+
+  .cta:hover {
+    background: var(--accent-hover);
+  }
+
+  .root a:hover {
+    text-decoration: underline;
+  }
+}

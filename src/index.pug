@@ -1,0 +1,45 @@
+extends layout
+
+//- 图标：20px，线宽 1.75，颜色跟随文字
+mixin icon(cls, size = 20)
+  svg(class=cls width=size height=size viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true")
+    block
+
+block body
+  header.wrap.bar
+    a.brand(href="./")
+      img(src=base + "favicon.svg" alt="" width="28" height="28")
+      span= brand
+    details.lang
+      summary.btn(aria-label=t.lang + l.colon + l.name)
+        span= l.name
+        +icon("i-caret", 16)
+          path(d="m6 9 6 6 6-6")
+      ul
+        each x in langs
+          li
+            a(href=base + x.code + "/" hreflang=x.tag lang=x.tag aria-current=x === l && "page")= x.name
+    //- 没有 JS 时无法切换，page.js 加载后才显示
+    button.btn.theme(type="button" hidden data-colon=l.colon data-title=t.theme.title data-system=t.theme.system data-light=t.theme.light data-dark=t.theme.dark)
+      +icon("i-system")
+        rect(x="3" y="4" width="18" height="12" rx="2")
+        path(d="M8 20h8M12 16v4")
+      +icon("i-light")
+        circle(cx="12" cy="12" r="4")
+        path(d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41")
+      +icon("i-dark")
+        path(d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z")
+  main.wrap
+    section.hero
+      h1= t.hero.title
+      p= t.hero.desc
+      a.cta(href="#features")= t.hero.cta
+    section#features.features
+      h2= t.features.title
+      ul
+        each f in t.features.li
+          li
+            h3= f.title
+            p= f.desc
+  footer
+    .wrap © #{year} #{brand}

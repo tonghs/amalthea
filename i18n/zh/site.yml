@@ -1,0 +1,20 @@
+description: 用 yml 写文案，用 pug 写模板，每种语言构建出一个静态页面。
+lang: 切换语言
+theme:
+  title: 主题
+  system: 跟随系统
+  light: 浅色
+  dark: 深色
+hero:
+  title: 一份文案，多种语言
+  desc: 用 yml 写文案，用 pug 写模板。构建后，每种语言得到一个纯静态页面。
+  cta: 查看功能
+features:
+  title: 功能亮点
+  li:
+    - title: 文案即配置
+      desc: 文案和模板分开。改文案不用碰代码。
+    - title: 自动翻译
+      desc: 只维护中文文案，一条命令就能增量翻译成其他语言。
+    - title: 零运行时
+      desc: 只输出 HTML 和 CSS，可以部署到任何静态托管。

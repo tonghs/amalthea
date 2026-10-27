@@ -1,0 +1,19 @@
+{
+  "name": "amalthea",
+  "private": true,
+  "type": "module",
+  "homepage": "https://example.com/",
+  "brand": "Amalthea",
+  "scripts": {
+    "build": "bun build.js",
+    "dev": "bun --watch dev.js",
+    "tran": "tran",
+    "test": "bun test"
+  },
+  "devDependencies": {
+    "@1-/tran": "^0.1.9",
+    "@3-/lang": "^0.2.15",
+    "js-yaml": "^5.5.0",
+    "pug": "^3.0.4"
+  }
+}

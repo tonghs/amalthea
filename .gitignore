@@ -1,0 +1,26 @@
+# 依赖与构建产物
+node_modules/
+dist/
+coverage/
+
+# 环境变量：bun 会自动加载 .env，WEBC_TOKEN 可能写在这里，不能提交
+.env
+.env.*
+!.env.example
+
+# 日志
+*.log
+
+# 浏览器验收截图（Playwright MCP 输出）
+.playwright-mcp/
+
+# 编辑器
+.idea/
+.vscode/
+*.swp
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 注意：不要忽略 i18n/.cache/（tran 增量翻译状态，必须提交）和 bun.lock

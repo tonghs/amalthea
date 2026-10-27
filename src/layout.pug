@@ -1,0 +1,25 @@
+doctype html
+html(lang=l.tag dir=l.dir)
+  - const title = brand + " · " + t.hero.title
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width,initial-scale=1")
+    title= title
+    meta(name="description" content=t.description)
+    meta(property="og:title" content=title)
+    meta(property="og:description" content=t.description)
+    meta(property="og:url" content=url)
+    link(rel="icon" href=base + "favicon.svg" type="image/svg+xml")
+    link(rel="canonical" href=url)
+    each x in langs
+      link(rel="alternate" hreflang=x.tag href=x.url)
+    link(rel="alternate" hreflang="x-default" href=home)
+    //- 字体 CSS gzip 后约 67 KB，异步加载，不阻塞首屏
+    link(rel="preconnect" href="https://cdn.jsdmirror.com" crossorigin)
+    link(rel="stylesheet" href=FONT media="print" onload="this.media='all'")
+    noscript
+      link(rel="stylesheet" href=FONT)
+    style!= css
+    script!= js
+  body
+    block body

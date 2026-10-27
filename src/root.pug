@@ -1,0 +1,11 @@
+extends layout
+
+//- 有 JS 时在 head 里直接跳转；以下内容给禁用 JS 的访客和爬虫
+block body
+  main.wrap.root
+    img(src="favicon.svg" alt="" width="64" height="64")
+    h1= brand
+    ul
+      each x in langs
+        li
+          a(href=x.code + "/" hreflang=x.tag lang=x.tag)= x.name

@@ -274,6 +274,12 @@ describe("build", () => {
     expect(existsSync(join(out, "stale.html"))).toBe(false);
   });
 
+  test("译文不是合法 yml 时，报错带上文件路径", () => {
+    // 亚美尼亚语用英文冒号代替句号，tran 不给值加引号，行尾冒号会让解析失败
+    writeFileSync(join(root, "i18n/ja/site.yml"), "description: 段落の終わり:\n");
+    expect(() => build({ root, out })).toThrow("i18n/ja/site.yml");
+  });
+
   test("译文缺键时报错并提示运行 tran", () => {
     editYml("ja", (t) => delete t.lang);
     expect(() => build({ root, out })).toThrow("i18n/ja/site.yml 缺少 lang，请运行 bun run tran");

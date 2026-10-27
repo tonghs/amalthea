@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, test } from "bun:test";
 import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { dump, load } from "js-yaml";
 import build, { missing } from "../build.js";
 
 const ROOT = join(import.meta.dirname, "..");
@@ -21,7 +22,20 @@ beforeEach(() => {
 afterEach(() => rmSync(root, { recursive: true, force: true }));
 
 const html = (p) => readFileSync(join(out, p), "utf8"),
-  addLang = (code) => cpSync(join(root, "i18n/en"), join(root, "i18n", code), { recursive: true });
+  head = (p) => {
+    const page = html(p);
+    return page.slice(0, page.indexOf("</head>"));
+  },
+  src = (p) => readFileSync(join(ROOT, "src", p), "utf8"),
+  addLang = (code) => cpSync(join(root, "i18n/en"), join(root, "i18n", code), { recursive: true }),
+  // 用 fn 修改 i18n/<code>/site.yml 的文案对象
+  editYml = (code, fn) => {
+    const p = join(root, "i18n", code, "site.yml"),
+      t = load(readFileSync(p, "utf8"));
+    fn(t);
+    writeFileSync(p, dump(t));
+  },
+  count = (s, sub) => s.split(sub).length - 1;
 
 describe("missing", () => {
   test("结构一致时返回空", () => {
@@ -67,29 +81,98 @@ describe("build", () => {
     expect(en).toContain('<link rel="alternate" hreflang="ja" href="https://example.com/ja/">');
     expect(en).toContain('<link rel="alternate" hreflang="x-default" href="https://example.com/">');
     expect(en).toContain('localStorage.lang="en"');
-    expect(en).toContain('addEventListener("keydown"');
-    expect(en).toContain('href="../ja/" hreflang="ja" lang="ja">日本語</a>');
-    expect(en).toContain('aria-current="page">English</a>');
-    expect(en).toContain('aria-label="Language: English"');
-    expect(en).toContain('data-colon=": "');
-    expect(html("zh/index.html")).toContain('aria-label="切换语言：中文"');
+    expect(en).toContain('data-title="Theme: "');
     expect(en).toContain("© " + new Date().getFullYear() + " Amalthea");
   });
 
-  test("每页 head 都先应用主题，避免闪烁", () => {
+  test("语言按钮没有 JS 时指向根页，有 JS 时打开对话框", () => {
     build({ root, out });
-    for (const p of ["index.html", "zh/index.html", "en/index.html"]) {
-      const page = html(p),
-        head = page.slice(0, page.indexOf("</head>"));
-      expect(head).toContain("document.documentElement.dataset.theme = theme");
+    const en = html("en/index.html");
+    expect(en).toContain('<a class="btn lang" href="../" aria-haspopup="dialog" aria-label="Language: English">');
+    // page.js 用 querySelector 只取第 1 个
+    expect(count(en, 'class="btn lang"')).toBe(1);
+    expect(html("zh/index.html")).toContain('aria-label="切换语言：中文"');
+  });
+
+  test("语言对话框列出所有语言，当前语言高亮", () => {
+    build({ root, out });
+    const ja = html("ja/index.html"),
+      dialog = ja.slice(ja.indexOf('<dialog class="langs"'), ja.indexOf("</dialog>"));
+    expect(ja).toContain('<dialog class="langs" aria-labelledby="langs-title">');
+    expect(count(ja, 'id="langs-title"')).toBe(1);
+    expect(dialog).toContain('<h2 id="langs-title">言語を切り替え</h2>');
+    expect(dialog).toContain('aria-label="閉じる"');
+    expect(dialog).toContain('<a href="../en/" hreflang="en" lang="en"><span>English</span></a>');
+    expect(dialog).toContain('<a href="../ja/" hreflang="ja" lang="ja" aria-current="page"><span>日本語</span><svg');
+    expect(count(dialog, "aria-current")).toBe(1);
+    expect(count(dialog, "<li>")).toBe(3);
+  });
+
+  test("语言页 head 原样内联 theme.js 和 page.js，theme.js 在前", () => {
+    build({ root, out });
+    const themeJs = src("theme.js"),
+      pageJs = src("page.js");
+    for (const p of ["zh/index.html", "en/index.html", "ja/index.html"]) {
+      const h = head(p);
+      expect(h).toContain(themeJs);
+      expect(h).toContain(pageJs);
+      expect(h.indexOf(themeJs)).toBeLessThan(h.indexOf(pageJs));
     }
+  });
+
+  test("根页 head 原样内联 theme.js，不含 page.js", () => {
+    build({ root, out });
+    const h = head("index.html");
+    expect(h).toContain(src("theme.js"));
+    expect(html("index.html")).not.toContain(src("page.js"));
   });
 
   test("语言页的主题按钮带翻译文案，默认隐藏等 JS 显示", () => {
     build({ root, out });
     const ja = html("ja/index.html");
-    expect(ja).toMatch(/<button class="btn theme" type="button" hidden data-colon="：" data-title="テーマ" data-system="[^"]+" data-light="ライト" data-dark="ダーク">/);
-    expect(ja).toContain('addEventListener("storage"');
+    expect(ja).toMatch(/<button class="btn theme" type="button" hidden data-title="テーマ：" data-system="[^"]+" data-light="ライト" data-dark="ダーク">/);
+  });
+
+  test("语言页主题按钮包含 3 个主题图标（style.css 按 class 切换显示）", () => {
+    build({ root, out });
+    const en = html("en/index.html"),
+      start = en.indexOf('<button class="btn theme"'),
+      btn = en.slice(start, en.indexOf("</button>", start));
+    for (const cls of ["i-system", "i-light", "i-dark"]) {
+      expect(count(btn, `<svg class="${cls}"`)).toBe(1);
+    }
+  });
+
+  test("根页不含主题按钮、语言按钮和对话框", () => {
+    build({ root, out });
+    const index = html("index.html");
+    for (const s of ["btn theme", 'class="btn lang"', "<dialog"]) expect(index).not.toContain(s);
+  });
+
+  test("文案中的 HTML 特殊字符在正文和属性中都被转义", () => {
+    const X = `A"B<script>alert('x')</script>&C`,
+      E = "A&quot;B&lt;script&gt;alert('x')&lt;/script&gt;&amp;C";
+    for (const code of ["zh", "en"]) {
+      editYml(code, (t) => {
+        t.description = t.lang = t.close = t.theme.title = t.hero.title = X;
+      });
+    }
+    build({ root, out });
+    const en = html("en/index.html");
+    expect(en).toContain(`<title>Amalthea · ${E}</title>`);
+    expect(en).toContain(`<meta name="description" content="${E}">`);
+    expect(en).toContain(`<meta property="og:title" content="Amalthea · ${E}">`);
+    expect(en).toContain(`<h1>${E}</h1>`);
+    expect(en).toContain(`<a class="btn lang" href="../" aria-haspopup="dialog" aria-label="${E}: English">`);
+    expect(en).toContain(`data-title="${E}: " data-system="System"`);
+    expect(en).toContain(`<h2 id="langs-title">${E}</h2>`);
+    expect(en).toContain(`<button class="btn close" type="button" aria-label="${E}">`);
+    // 只有 head 里内联的那 1 个 script，文案没有注入新标签
+    expect(count(en, "<script")).toBe(1);
+    // 根页使用源语言文案
+    const index = html("index.html");
+    expect(index).toContain(`<title>Amalthea · ${E}</title>`);
+    expect(count(index, "<script")).toBe(1);
   });
 
   test("根页包含跳转脚本和所有语言链接", () => {

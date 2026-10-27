@@ -1,5 +1,6 @@
 description: 用 yml 写文案，用 pug 写模板，每种语言构建出一个静态页面。
 lang: 切换语言
+close: 关闭
 theme:
   title: 主题
   system: 跟随系统

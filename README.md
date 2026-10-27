@@ -36,7 +36,7 @@ bun run tran     # 增量翻译（需要 token，见下文）
 │   ├── root.pug           # 根页：JS 跳转 + 语言列表
 │   ├── style.css          # 构建时内联进 html
 │   ├── theme.js           # 每页 head 内联：绘制前应用主题，避免闪烁
-│   ├── page.js            # 语言页脚本：主题切换、下拉菜单收起
+│   ├── page.js            # 语言页脚本：语言对话框、主题切换
 │   └── pick.js            # 根页的语言选择逻辑，构建时内联
 ├── public/                # 原样拷到 dist/（favicon.svg）
 ├── test/                  # bun test
@@ -102,7 +102,7 @@ dist/
 2. 运行 `bun run tran`。首次运行会翻译 74 个文件，后续只翻译有变化的部分。
 3. 运行 `bun run build`。
 
-RTL 语言（ar、fa、ur、iw、sd）会自动加 `dir="rtl"`。语言切换器在语言多时可以滚动。
+RTL 语言（ar、fa、ur、iw、sd）会自动加 `dir="rtl"`。语言切换用对话框网格平铺，75 种语言在 desktop 上一屏可以看到 52 种。
 
 ## 翻译 token
 

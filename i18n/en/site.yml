@@ -1,5 +1,6 @@
 description: Write copy in yml and templates in pug, then build one static page per language.
 lang: Language
+close: Close
 theme:
   title: Theme
   system: System

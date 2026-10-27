@@ -10,20 +10,17 @@ block body
     a.brand(href="./")
       img(src=base + "favicon.svg" alt="" width="28" height="28")
       span= brand
-    details.lang
-      summary.btn(aria-label=t.lang + l.colon + l.name)
-        span= l.name
-        +icon("i-caret", 16)
-          path(d="m6 9 6 6 6-6")
-      ul
-        each x in langs
-          li
-            a(href=base + x.code + "/" hreflang=x.tag lang=x.tag aria-current=x === l && "page")= x.name
+    //- 没有 JS 时是指向根页的链接（根页列出全部语言）；有 JS 时打开语言对话框
+    a.btn.lang(href=base aria-haspopup="dialog" aria-label=t.lang + l.colon + l.name)
+      +icon()
+        path(d="m5 8 6 6m-7 0 6-6 2-3M2 5h12M7 2h1m14 20-5-10-5 10m2-4h6")
+      span= l.name
     //- 没有 JS 时无法切换，page.js 加载后才显示
-    button.btn.theme(type="button" hidden data-colon=l.colon data-title=t.theme.title data-system=t.theme.system data-light=t.theme.light data-dark=t.theme.dark)
+    button.btn.theme(type="button" hidden data-title=t.theme.title + l.colon data-system=t.theme.system data-light=t.theme.light data-dark=t.theme.dark)
+      //- 半填充圆：半亮半暗，表示由系统决定
       +icon("i-system")
-        rect(x="3" y="4" width="18" height="12" rx="2")
-        path(d="M8 20h8M12 16v4")
+        circle(cx="12" cy="12" r="9")
+        path(d="M12 3a9 9 0 0 0 0 18z" fill="currentColor")
       +icon("i-light")
         circle(cx="12" cy="12" r="4")
         path(d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41")
@@ -43,3 +40,19 @@ block body
             p= f.desc
   footer
     .wrap © #{year} #{brand}
+  //- 语言对话框：dialog 自身不留内边距，点击 dialog 本身即点击遮罩
+  dialog.langs(aria-labelledby="langs-title")
+    .sheet
+      header
+        h2#langs-title= t.lang
+        button.btn.close(type="button" aria-label=t.close)
+          +icon()
+            path(d="M18 6 6 18M6 6l12 12")
+      ul
+        each x in langs
+          li
+            a(href=base + x.code + "/" hreflang=x.tag lang=x.tag aria-current=x === l && "page")
+              span= x.name
+              if x === l
+                +icon("", 16)
+                  path(d="M20 6 9 17l-5-5")

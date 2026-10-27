@@ -1,5 +1,6 @@
 description: yml で文言を、pug でテンプレートを書き、言語ごとに静的ページを生成します。
 lang: 言語を切り替え
+close: 閉じる
 theme:
   title: テーマ
   system: システム設定に合わせる

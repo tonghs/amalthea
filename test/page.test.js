@@ -1,21 +1,22 @@
 import { afterAll, afterEach, beforeAll, describe, expect, test } from "bun:test";
-import { mkdtempSync, readFileSync, rmSync } from "node:fs";
-import { tmpdir } from "node:os";
+import { readFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { Window } from "happy-dom";
 import build from "../build.js";
+import fixture from "./fixture.js";
 
 // 在 happy-dom 里加载真实构建产物，让页面内联的 theme.js 和 page.js 自己运行
 delete process.env.SITE_URL;
-let out;
+let root, out;
 const windows = [];
 
 beforeAll(() => {
-  out = mkdtempSync(join(tmpdir(), "amalthea-page-"));
-  build({ out });
+  root = fixture();
+  out = join(root, "dist");
+  build({ root, out });
 });
 
-afterAll(() => rmSync(out, { recursive: true, force: true }));
+afterAll(() => rmSync(root, { recursive: true, force: true }));
 
 afterEach(async () => {
   for (const w of windows.splice(0)) await w.happyDOM.close();

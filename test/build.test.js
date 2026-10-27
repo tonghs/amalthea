@@ -1,11 +1,10 @@
 import { afterEach, beforeEach, describe, expect, test } from "bun:test";
-import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
+import { cpSync, existsSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { dump, load } from "js-yaml";
 import build, { missing } from "../build.js";
+import fixture, { ROOT } from "./fixture.js";
 
-const ROOT = join(import.meta.dirname, "..");
 // 测试不受外部 SITE_URL 影响，统一以 package.json 的 homepage 为准
 delete process.env.SITE_URL;
 let root, out;
@@ -66,13 +65,9 @@ describe("missing", () => {
 });
 
 describe("build", () => {
-  // 把项目输入拷到临时目录，测试改动不影响真实文件
   beforeEach(() => {
-    root = mkdtempSync(join(tmpdir(), "amalthea-"));
+    root = fixture();
     out = join(root, "dist");
-    for (const p of ["src", "i18n", "public", "tran.yml", "package.json"]) {
-      cpSync(join(ROOT, p), join(root, p), { recursive: true });
-    }
   });
 
   afterEach(() => rmSync(root, { recursive: true, force: true }));

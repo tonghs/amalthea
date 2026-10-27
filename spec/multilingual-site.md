@@ -28,7 +28,7 @@
 
 - `/`：根页。按顺序选择语言：上次访问的语言（`localStorage.lang`）→ 浏览器语言 → 源语言。
 - `/<lang>/`：语言页。访问时把 `<lang>` 写入 `localStorage.lang`。
-- 语言切换器用 `details` 下拉。`src/page.js` 增强为点外部或按 Esc 收起。
+- 语言切换器用对话框网格（参考 webc 的 `I18n`），支持 75 种语言。没有 JS 时按钮指向根页的语言列表。
 - 根页同时列出所有语言链接。禁用 JS 的访客和爬虫可以用这些链接。
 
 ## 浏览器语言匹配
@@ -42,16 +42,19 @@
 
 - 每页都有 `canonical`，以及每个语言的 `hreflang` 链接。
 - `x-default` 指向根页。
-- `hreflang` 必须用绝对 URL。站点地址取自 `package.json` 的 `homepage`。
+- `hreflang` 必须用绝对 URL。站点地址优先取环境变量 `SITE_URL`（CI 注入），没有时取 `package.json` 的 `homepage`。
 - `iw` 输出为 `he`，因为 `iw` 是已废弃的 BCP 47 代码。
 - ar、fa、ur、iw、sd 加 `dir="rtl"`。
 
 ## 构建校验
 
-出现以下情况时，构建直接失败，不输出残缺页面：
+出现以下情况时，构建直接失败，不清空 `dist/`，上一次的产物保持不变：
 
-- 译文缺少源语言 yml 中的键（提示运行 `bun run tran`）。
+- `package.json` 缺少 `homepage`（且没有 `SITE_URL`）或 `brand`。
+- 译文缺少源语言 yml 中的键，或键的值为空（提示运行 `bun run tran`）。
 - `i18n/` 下的目录名不是 `@3-/lang` 支持的语言代码。
+- 缺少源语言文案。
+- 模板渲染出错。所有页面先渲染到内存，全部成功后才清空 `dist/` 并写盘。
 
 ## 翻译规则（实测得出）
 

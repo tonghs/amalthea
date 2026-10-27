@@ -1,6 +1,7 @@
 doctype html
 html(lang=l.tag dir=l.dir)
   - const title = brand + " · " + t.hero.title
+  - const FONT = "https://cdn.jsdmirror.com/npm/18s@0.2.24/_.css"
   head
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width,initial-scale=1")
@@ -15,7 +16,7 @@ html(lang=l.tag dir=l.dir)
       link(rel="alternate" hreflang=x.tag href=x.url)
     link(rel="alternate" hreflang="x-default" href=home)
     //- 字体 CSS gzip 后约 67 KB，异步加载，不阻塞首屏
-    link(rel="preconnect" href="https://cdn.jsdmirror.com" crossorigin)
+    link(rel="preconnect" href=new URL(FONT).origin crossorigin)
     link(rel="stylesheet" href=FONT media="print" onload="this.media='all'")
     noscript
       link(rel="stylesheet" href=FONT)

@@ -6,26 +6,21 @@ import CODE from "@3-/lang/CODE.js";
 import NAME from "@3-/lang/NAME.js";
 import pick from "./src/pick.js";
 
-const FONT = "https://cdn.jsdmirror.com/npm/18s@0.2.24/_.css",
-  RTL = new Set(["ar", "fa", "ur", "iw", "sd"]),
+const RTL = new Set(["ar", "fa", "ur", "iw", "sd"]),
   // iw 是已废弃的 BCP 47 代码，html lang 和 hreflang 输出 he
   TAG = { iw: "he" },
   // 中日韩用全角冒号拼接「标签：值」
-  CJK = /^(zh|ja|ko)/,
-  write = (path, txt) => {
-    mkdirSync(dirname(path), { recursive: true });
-    writeFileSync(path, txt);
-  };
+  CJK = /^(zh|ja|ko)/;
 
 /*
   src 源语言文案，t 译文
-  返回 src 中有、t 中缺失的键路径
+  返回 src 中有、t 中缺失或为空值（yml 里只写了键）的键路径
 */
 export const missing = (src, t, path = []) =>
   src && typeof src === "object"
     ? Object.keys(src).flatMap((k) => {
         const p = [...path, k];
-        return t?.[k] === undefined ? [p.join(".")] : missing(src[k], t[k], p);
+        return t?.[k] == null ? [p.join(".")] : missing(src[k], t[k], p);
       })
     : [];
 
@@ -64,32 +59,37 @@ const build = ({ root = import.meta.dirname, out = join(root, "dist"), site = pr
       };
     }),
     // 品牌名不放进 yml，避免被翻译改写
-    shared = { FONT, langs, brand, year: new Date().getFullYear(), home, css: read("src", "style.css") },
+    shared = { langs, brand, year: new Date().getFullYear(), home, css: read("src", "style.css") },
     // 每页 head 先执行主题脚本，再执行各自的脚本
     themeJs = read("src", "theme.js"),
     pageJs = read("src", "page.js"),
     render = (name, locals) => pug.renderFile(join(root, "src", name + ".pug"), { ...shared, ...locals });
 
+  // 先全部渲染到内存，再清空输出目录：模板出错时保留旧产物
+  const pages = [
+    ...langs.map((l) => [
+      join(l.code, "index.html"),
+      render("index", { l, t: l.t, url: l.url, base: "../", js: themeJs + `try{localStorage.lang=${JSON.stringify(l.code)}}catch{}\n` + pageJs }),
+    ]),
+    [
+      "index.html",
+      render("root", {
+        l: langs[0],
+        t: src,
+        url: home,
+        base: "",
+        js: themeJs + `let s;try{s=localStorage.lang}catch{}location.replace((${pick})(${JSON.stringify(codes)},s,navigator.languages||[navigator.language])+"/")`,
+      }),
+    ],
+  ];
+
   rmSync(out, { recursive: true, force: true });
   cpSync(join(root, "public"), out, { recursive: true });
-
-  for (const l of langs) {
-    write(
-      join(out, l.code, "index.html"),
-      render("index", { l, t: l.t, url: l.url, base: "../", js: themeJs + `try{localStorage.lang=${JSON.stringify(l.code)}}catch{}\n` + pageJs }),
-    );
+  for (const [path, html] of pages) {
+    const file = join(out, path);
+    mkdirSync(dirname(file), { recursive: true });
+    writeFileSync(file, html);
   }
-
-  write(
-    join(out, "index.html"),
-    render("root", {
-      l: langs[0],
-      t: src,
-      url: home,
-      base: "",
-      js: themeJs + `let s;try{s=localStorage.lang}catch{}location.replace((${pick})(${JSON.stringify(codes)},s,navigator.languages||[navigator.language])+"/")`,
-    }),
-  );
 
   return codes;
 };

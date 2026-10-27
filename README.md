@@ -39,7 +39,7 @@ bun run tran     # 增量翻译（需要 token，见下文）
 │   ├── page.js            # 语言页脚本：语言对话框、主题切换
 │   └── pick.js            # 根页的语言选择逻辑，构建时内联
 ├── public/                # 原样拷到 dist/（favicon.svg）
-├── test/                  # bun test
+├── test/                  # bun test；page.test.js 用 happy-dom 测页面交互
 ├── build.js               # 构建脚本
 ├── dev.js                 # 开发服务器
 ├── tran.yml               # 翻译配置：源语言和目标语言

@@ -130,15 +130,17 @@
 
 `:lang()` 选择器按 `<html lang>` 自动覆盖以下 token。
 
-| 文字体系 | 语言 | `--lh-body` | `--ls-heading` | `--measure` |
-|---|---|---|---|---|
-| 默认（拉丁、西里尔、希腊、希伯来、亚美尼亚、格鲁吉亚） | en、de、ru、iw 等 | 1.6 | -0.02em | 68ch |
-| 中日韩 | zh、zh-TW、ja、ko | 1.75 | 0 | 40em（约 40 字） |
-| 复杂文字（阿拉伯、婆罗米、东南亚） | ar、fa、ur、sd、hi、mr、ne、bn、as、gu、kn、or、ta、te、si、th、lo、km、my | 1.8 | 0 | 68ch |
+| 文字体系 | 语言 | `--lh-body` | `--lh-tight` / `--lh-heading` | `--ls-heading` | `--measure` |
+|---|---|---|---|---|---|
+| 默认（拉丁、西里尔、希腊、希伯来、亚美尼亚、格鲁吉亚） | en、de、ru、iw 等 | 1.6 | 1.2 / 1.3 | -0.02em | 68ch |
+| 中日韩 | zh、zh-TW、ja、ko | 1.75 | 1.2 / 1.3 | 0 | 40em（约 40 字） |
+| 复杂文字（阿拉伯、婆罗米、东南亚） | ar、fa、ur、sd、hi、mr、ne、bn、as、gu、kn、or、ta、te、si、th、lo、km、my | 1.8 | 1.4 / 1.5 | 0 | 68ch |
 
+- **标题行高**：复杂文字的字形上下有附标或叠写（例如缅甸文），标题用默认行高时，下行笔画会压到下一行，所以放大到 1.4 / 1.5。
 - **字距**：只有默认体系的标题收紧字距。中日韩收紧字距会显得拥挤；阿拉伯文改字距会破坏连写。
 - **行长**：段落最大宽度用 `--measure`。
 - **断行**：标题用 `text-wrap: balance` 平衡各行长度，用 `word-break: auto-phrase` 按词组断行（目前对日文生效）。段落用 `text-wrap: pretty`，避免最后一行只剩 1 个字。
+- **长单词**：挪威语、丹麦语、德语等有很长的复合词（例如 Funksjonshøydepunkter），在 320px 宽时比标题还宽。标题用 `hyphens: auto` 按语言规则断词加连字符；全站用 `overflow-wrap: break-word` 兜底，浏览器没有该语言的断词字典时也强制换行，不溢出。
 - **RTL**：只用逻辑属性，例如 `margin-inline-start`、`inset-inline-end`、`padding-inline`，不要用 `left`、`right`。图标不随方向翻转，因为现有图标都没有方向含义。
 - **全角冒号**：「标签：值」形式的文案，中日韩用全角冒号，其他语言用 `": "`。构建脚本提供 `l.colon`。
 

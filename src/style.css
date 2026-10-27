@@ -87,6 +87,8 @@
 /* 阿拉伯、婆罗米、东南亚文字：字形有上下附标或连写，行高更大，不改字距 */
 :root:is(:lang(ar), :lang(fa), :lang(ur), :lang(sd), :lang(hi), :lang(mr), :lang(ne), :lang(bn), :lang(as), :lang(gu), :lang(kn), :lang(or), :lang(ta), :lang(te), :lang(si), :lang(th), :lang(lo), :lang(km), :lang(my)) {
   --lh-body: 1.8;
+  --lh-tight: 1.4;
+  --lh-heading: 1.5;
   --ls-heading: 0;
 }
 
@@ -137,6 +139,8 @@ body {
   font: var(--fw-regular) var(--fs-body) / var(--lh-body) t, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   color: var(--fg);
   background: var(--bg);
+  /* 长复合词在窄屏比容器还宽时强制换行，见 DESIGN.md 第 7 节 */
+  overflow-wrap: break-word;
 }
 
 h1,
@@ -147,6 +151,8 @@ h3 {
   text-wrap: balance;
   /* 按词组断行，避免日文把一个词拆到两行 */
   word-break: auto-phrase;
+  /* 长复合词按语言规则断词加连字符 */
+  hyphens: auto;
 }
 
 p {
